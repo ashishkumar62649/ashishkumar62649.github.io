@@ -36,45 +36,52 @@
 
   <div class="page-content">
 
-    <!-- Hero -->
-    <section class="hero">
-      <div class="container">
-        <div class="hero-content">
-          <div class="hero-top">
+    <!-- ===== Hero (Sticky Pinned) ===== -->
+    <div class="hero-wrapper">
+      <div class="hero-pinned">
+        <div class="hero-motion">
+          <!-- Top bar -->
+          <div class="hero-top-bar">
             <span class="hero-eyebrow">Data Science / AI / Systems</span>
             <span class="hero-year">/Building since 2024</span>
           </div>
 
-          <div class="hero-scroll-title">
-            <h1 class="hero-heading">
-              <span class="line"><span>DATA SCIENCE</span></span>
-              <span class="line"><span>&amp; AI SYSTEMS</span></span>
-            </h1>
+          <!-- Huge heading -->
+          <h1 class="hero-heading">
+            <span class="line"><span>DATA SCIENCE</span></span>
+            <span class="line"><span>&amp; AI SYSTEMS</span></span>
+          </h1>
+
+          <!-- Profile card -->
+          <div class="hero-card-wrap">
+            <div class="hero-card">
+              <img src="assets/profile.png" alt="Ashish Kumar">
+            </div>
           </div>
 
-          <div class="hero-bottom">
-            <div>
-              <p class="hero-desc">Learning how intelligence, data, and software systems come together. Building my path through projects, writing, and consistent learning.</p>
-              <div class="hero-actions">
-                <a href="projects.html" class="btn btn-primary">View Projects</a>
-                <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-                <a href="contact.html" class="btn btn-ghost">Contact</a>
-              </div>
-            </div>
-            <div class="hero-scroll-image">
-              <div class="hero-image-wrap">
-                <div class="hero-image-card">
-                  <img src="assets/profile.png" alt="Ashish Kumar">
-                </div>
-              </div>
-            </div>
+          <!-- Decorations -->
+          <div class="hero-deco hero-deco-star"></div>
+          <div class="hero-deco hero-deco-orbit"></div>
+          <div class="hero-deco hero-deco-dot"></div>
+          <div class="hero-deco hero-deco-line"></div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== About (Slides over hero) ===== -->
+    <section class="about-section">
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal">
+            <p class="about-eyebrow">About</p>
+            <h2 class="about-heading">Hey!</h2>
+            <p class="about-text">I'm Ashish, a Data Science and AI student based in Bangalore, building my path through Python, SQL, machine learning, AI tools, writing, and consistent projects.</p>
+            <p class="about-text">I'm interested in how intelligence, data, and software systems come together to solve real problems.</p>
+          </div>
+          <div class="about-card reveal reveal-delay-2">
+            <img src="assets/profile.png" alt="Ashish Kumar">
           </div>
         </div>
-
-        <!-- Decorations -->
-        <div class="hero-deco hero-deco-ring"></div>
-        <div class="hero-deco hero-deco-dot"></div>
-        <div class="hero-deco hero-deco-line"></div>
       </div>
     </section>
 
@@ -99,27 +106,6 @@
         <span class="marquee-item">PROJECTS</span><span class="marquee-dot">&bull;</span>
       </div>
     </div>
-
-    <!-- About -->
-    <section class="about">
-      <div class="container">
-        <div class="about-grid">
-          <div class="reveal">
-            <p class="about-eyebrow">About</p>
-            <h2 class="about-heading">Hey!</h2>
-            <p class="about-text">I'm Ashish, a Data Science and AI student based in Bangalore, building my path through Python, SQL, machine learning, AI tools, writing, and consistent projects.</p>
-            <p class="about-text">I'm interested in how intelligence, data, and software systems come together to solve real problems.</p>
-          </div>
-          <div class="reveal reveal-delay-2" style="display: flex; justify-content: center;">
-            <div class="hero-image-card" style="width: 260px; height: 320px;">
-              <img src="assets/profile.png" alt="Ashish Kumar">
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container"><hr class="sep"></div>
 
     <!-- Now -->
     <section class="section">
