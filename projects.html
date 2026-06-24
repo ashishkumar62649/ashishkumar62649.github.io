@@ -11,15 +11,11 @@
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-
   <div id="stars"></div>
-
   <nav class="nav">
-    <div class="nav-inner">
+    <div class="nav-pill">
       <a href="index.html" class="nav-logo">Ashish Kumar</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
-      </button>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false"><span></span><span></span><span></span></button>
       <ul class="nav-links" id="nav-links">
         <li><a href="index.html">Home</a></li>
         <li><a href="projects.html" class="active">Projects</a></li>
@@ -32,148 +28,66 @@
       </ul>
     </div>
   </nav>
-
   <div class="page-content">
     <div class="container">
-      <div class="page-header fade-in">
+      <div class="page-header reveal">
         <p class="section-eyebrow">Projects</p>
         <h1 class="section-title">Projects</h1>
         <p class="section-desc">Things I've built, things I'm building, and things that are planned.</p>
       </div>
     </div>
-
-    <!-- Featured -->
     <section class="section" style="padding-top: 0;">
       <div class="container">
-        <div class="fade-in">
-          <p class="section-eyebrow">Featured</p>
-          <h2 class="section-title">Published projects</h2>
-        </div>
+        <div class="reveal"><p class="section-eyebrow">Featured</p><h2 class="section-title">Published projects</h2></div>
         <div class="projects-grid">
-          <div class="project-card fade-in">
+          <div class="project-card reveal reveal-delay-1">
             <div class="project-card-head">
               <h3 class="project-card-title">Building Energy Anomaly Detection</h3>
               <span class="project-status status-published">Published</span>
             </div>
             <p class="project-card-desc">Unsupervised machine learning project for detecting abnormal building energy consumption patterns. Uses statistical methods and clustering to identify anomalies in time-series energy data.</p>
             <div class="project-card-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Pandas</span>
-              <span class="tech-tag">Scikit-learn</span>
-              <span class="tech-tag">Time Series</span>
-              <span class="tech-tag">Anomaly Detection</span>
+              <span class="tech-tag">Python</span><span class="tech-tag">Pandas</span><span class="tech-tag">Scikit-learn</span><span class="tech-tag">Time Series</span><span class="tech-tag">Anomaly Detection</span>
             </div>
-            <a href="https://github.com/ashishkumar62649/building-energy-anomaly-detection" target="_blank" rel="noopener" class="project-card-link">View on GitHub &#8599;</a>
+            <a href="https://github.com/ashishkumar62649/building-energy-anomaly-detection" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
           </div>
-          <div class="project-card fade-in">
+          <div class="project-card reveal reveal-delay-2">
             <div class="project-card-head">
               <h3 class="project-card-title">God Eyes</h3>
               <span class="project-status status-published">Published</span>
             </div>
             <p class="project-card-desc">Experimental AI/data system for learning larger project structure, services, documentation, and system design.</p>
             <div class="project-card-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Docker</span>
-              <span class="tech-tag">Databases</span>
-              <span class="tech-tag">Systems</span>
+              <span class="tech-tag">Python</span><span class="tech-tag">TypeScript</span><span class="tech-tag">Docker</span><span class="tech-tag">Databases</span><span class="tech-tag">Systems</span>
             </div>
-            <a href="https://github.com/ashishkumar62649/god-eyes" target="_blank" rel="noopener" class="project-card-link">View on GitHub &#8599;</a>
+            <a href="https://github.com/ashishkumar62649/god-eyes" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
           </div>
         </div>
       </div>
     </section>
-
     <div class="container"><hr class="sep"></div>
-
-    <!-- Coming Soon -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
-          <p class="section-eyebrow">Building</p>
-          <h2 class="section-title">Coming soon</h2>
-          <p class="section-desc">Projects I'm working on or planning next.</p>
-        </div>
-        <div class="coming-soon-grid fade-in">
-          <div class="coming-soon-card">
-            <h3 class="coming-soon-card-title">SQL E-commerce Analysis</h3>
-            <p class="coming-soon-card-status">Building</p>
-          </div>
-          <div class="coming-soon-card">
-            <h3 class="coming-soon-card-title">CSV Chatbot</h3>
-            <p class="coming-soon-card-status">Building</p>
-          </div>
-          <div class="coming-soon-card">
-            <h3 class="coming-soon-card-title">AI Resume Reviewer</h3>
-            <p class="coming-soon-card-status">Building</p>
-          </div>
-          <div class="coming-soon-card">
-            <h3 class="coming-soon-card-title">Streamlit Data Analytics Dashboard</h3>
-            <p class="coming-soon-card-status">Coming Soon</p>
-          </div>
-          <div class="coming-soon-card">
-            <h3 class="coming-soon-card-title">GitHub Profile Analyzer Tool</h3>
-            <p class="coming-soon-card-status">Coming Soon</p>
-          </div>
+        <div class="reveal"><p class="section-eyebrow">Building</p><h2 class="section-title">Coming soon</h2><p class="section-desc">Projects I'm working on or planning next.</p></div>
+        <div class="coming-soon-grid reveal reveal-delay-1">
+          <div class="coming-soon-card"><h3 class="coming-soon-card-title">SQL E-commerce Analysis</h3><p class="coming-soon-card-status">Building</p></div>
+          <div class="coming-soon-card"><h3 class="coming-soon-card-title">CSV Chatbot</h3><p class="coming-soon-card-status">Building</p></div>
+          <div class="coming-soon-card"><h3 class="coming-soon-card-title">AI Resume Reviewer</h3><p class="coming-soon-card-status">Building</p></div>
+          <div class="coming-soon-card"><h3 class="coming-soon-card-title">Streamlit Data Analytics Dashboard</h3><p class="coming-soon-card-status">Coming Soon</p></div>
+          <div class="coming-soon-card"><h3 class="coming-soon-card-title">GitHub Profile Analyzer Tool</h3><p class="coming-soon-card-status">Coming Soon</p></div>
         </div>
       </div>
     </section>
-
     <div class="container"><hr class="sep"></div>
-
-    <!-- Case Studies -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
-          <p class="section-eyebrow">Case Studies</p>
-          <h2 class="section-title">Project case studies</h2>
-          <div class="placeholder-block">
-            Detailed write-ups explaining the problem, approach, technical decisions, results, and lessons learned from each project. Coming soon.
-          </div>
+        <div class="reveal"><p class="section-eyebrow">Case Studies</p><h2 class="section-title">Project case studies</h2>
+          <div class="placeholder-block">Detailed write-ups explaining the problem, approach, technical decisions, results, and lessons learned from each project. Coming soon.</div>
         </div>
       </div>
     </section>
   </div>
-
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-text">
-          <h3>Ashish Kumar</h3>
-          <p>Exploring intelligence through data, code, and systems.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-col">
-            <h4>Pages</h4>
-            <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
-            <a href="writing.html">Writing</a>
-            <a href="learning.html">Learning</a>
-          </div>
-          <div class="footer-col">
-            <h4>More</h4>
-            <a href="research-notes.html">Research &amp; Notes</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-          </div>
-          <div class="footer-col">
-            <h4>Connect</h4>
-            <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="mailto:your-email@example.com">Email</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Ashish Kumar</p>
-        <div class="footer-bottom-links">
-          <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
+  <footer class="footer"><div class="container"><div class="footer-inner"><div class="footer-text"><h3>Ashish Kumar</h3><p>Exploring intelligence through data, code, and systems.</p></div><div class="footer-links"><div class="footer-col"><h4>Pages</h4><a href="index.html">Home</a><a href="projects.html">Projects</a><a href="writing.html">Writing</a><a href="learning.html">Learning</a></div><div class="footer-col"><h4>More</h4><a href="research-notes.html">Research &amp; Notes</a><a href="resume.html">Resume</a><a href="contact.html">Contact</a></div><div class="footer-col"><h4>Connect</h4><a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a><a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a><a href="mailto:your-email@example.com">Email</a></div></div></div><div class="footer-bottom"><p>&copy; 2026 Ashish Kumar</p><div class="footer-bottom-links"><a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a><a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a></div></div></div></footer>
   <script src="js/script.js"></script>
 </body>
 </html>

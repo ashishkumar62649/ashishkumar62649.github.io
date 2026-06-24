@@ -14,8 +14,9 @@
 
   <div id="stars"></div>
 
+  <!-- Navbar -->
   <nav class="nav">
-    <div class="nav-inner">
+    <div class="nav-pill">
       <a href="index.html" class="nav-logo">Ashish Kumar</a>
       <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
         <span></span><span></span><span></span>
@@ -38,22 +39,79 @@
     <!-- Hero -->
     <section class="hero">
       <div class="container">
-        <div class="hero-inner">
-          <div class="hero-text fade-in">
-            <p class="hero-eyebrow">Data Science / AI / Systems</p>
-            <h1 class="hero-name">Ashish Kumar</h1>
-            <p class="hero-tagline">Learning how intelligence, data, and software systems come together.</p>
-            <p class="hero-desc">I'm building my path into Data Science, AI, and software systems through projects, writing, and consistent learning.</p>
-            <div class="hero-actions">
-              <a href="projects.html" class="btn btn-primary">View Projects</a>
-              <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-              <a href="contact.html" class="btn btn-ghost">Contact</a>
+        <div class="hero-content">
+          <div class="hero-top">
+            <span class="hero-eyebrow">Data Science / AI / Systems</span>
+            <span class="hero-year">/Building since 2024</span>
+          </div>
+
+          <div class="hero-scroll-title">
+            <h1 class="hero-heading">
+              <span class="line"><span>DATA SCIENCE</span></span>
+              <span class="line"><span>&amp; AI SYSTEMS</span></span>
+            </h1>
+          </div>
+
+          <div class="hero-bottom">
+            <div>
+              <p class="hero-desc">Learning how intelligence, data, and software systems come together. Building my path through projects, writing, and consistent learning.</p>
+              <div class="hero-actions">
+                <a href="projects.html" class="btn btn-primary">View Projects</a>
+                <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
+                <a href="contact.html" class="btn btn-ghost">Contact</a>
+              </div>
+            </div>
+            <div class="hero-scroll-image">
+              <div class="hero-image-wrap">
+                <div class="hero-image-card">
+                  <img src="assets/profile.jpg" alt="Ashish Kumar">
+                </div>
+              </div>
             </div>
           </div>
-          <div class="hero-image fade-in">
-            <div class="hero-image-frame">
-              <div class="hero-image-orbit"></div>
-              <div class="hero-image-orbit-2"></div>
+        </div>
+
+        <!-- Decorations -->
+        <div class="hero-deco hero-deco-ring"></div>
+        <div class="hero-deco hero-deco-dot"></div>
+        <div class="hero-deco hero-deco-line"></div>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <span class="marquee-item">DATA</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">AI</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">SYSTEMS</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">PYTHON</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">SQL</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">MACHINE LEARNING</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">WRITING</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">PROJECTS</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">DATA</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">AI</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">SYSTEMS</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">PYTHON</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">SQL</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">MACHINE LEARNING</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">WRITING</span><span class="marquee-dot">&bull;</span>
+        <span class="marquee-item">PROJECTS</span><span class="marquee-dot">&bull;</span>
+      </div>
+    </div>
+
+    <!-- About -->
+    <section class="about">
+      <div class="container">
+        <div class="about-grid">
+          <div class="reveal">
+            <p class="about-eyebrow">About</p>
+            <h2 class="about-heading">Hey!</h2>
+            <p class="about-text">I'm Ashish, a Data Science and AI student based in Bangalore, building my path through Python, SQL, machine learning, AI tools, writing, and consistent projects.</p>
+            <p class="about-text">I'm interested in how intelligence, data, and software systems come together to solve real problems.</p>
+          </div>
+          <div class="reveal reveal-delay-2" style="display: flex; justify-content: center;">
+            <div class="hero-image-card" style="width: 260px; height: 320px;">
               <img src="assets/profile.jpg" alt="Ashish Kumar">
             </div>
           </div>
@@ -61,15 +119,17 @@
       </div>
     </section>
 
+    <div class="container"><hr class="sep"></div>
+
     <!-- Now -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
+        <div class="reveal">
           <p class="section-eyebrow">Now</p>
           <h2 class="section-title">What I'm doing right now</h2>
         </div>
         <div class="now-grid">
-          <div class="fade-in">
+          <div class="reveal reveal-delay-1">
             <ul class="now-list">
               <li>Building internship-ready data and AI projects</li>
               <li>Learning Python, SQL, machine learning, and GenAI tools</li>
@@ -77,7 +137,7 @@
               <li>Exploring how intelligence, data, and software systems connect</li>
             </ul>
           </div>
-          <div class="fade-in">
+          <div class="reveal reveal-delay-2">
             <div class="stats-row" style="grid-template-columns: 1fr 1fr;">
               <div class="stat-cell">
                 <div class="stat-number">2</div>
@@ -98,13 +158,13 @@
     <!-- Featured Projects -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
+        <div class="reveal">
           <p class="section-eyebrow">Projects</p>
           <h2 class="section-title">Featured projects</h2>
           <p class="section-desc">Real things I've built. Each one teaches me something new.</p>
         </div>
         <div class="projects-grid">
-          <div class="project-card fade-in">
+          <div class="project-card reveal reveal-delay-1">
             <div class="project-card-head">
               <h3 class="project-card-title">Building Energy Anomaly Detection</h3>
               <span class="project-status status-published">Published</span>
@@ -116,9 +176,9 @@
               <span class="tech-tag">Scikit-learn</span>
               <span class="tech-tag">Time Series</span>
             </div>
-            <a href="https://github.com/ashishkumar62649/building-energy-anomaly-detection" target="_blank" rel="noopener" class="project-card-link">View on GitHub &#8599;</a>
+            <a href="https://github.com/ashishkumar62649/building-energy-anomaly-detection" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
           </div>
-          <div class="project-card fade-in">
+          <div class="project-card reveal reveal-delay-2">
             <div class="project-card-head">
               <h3 class="project-card-title">God Eyes</h3>
               <span class="project-status status-published">Published</span>
@@ -130,7 +190,7 @@
               <span class="tech-tag">Docker</span>
               <span class="tech-tag">Systems</span>
             </div>
-            <a href="https://github.com/ashishkumar62649/god-eyes" target="_blank" rel="noopener" class="project-card-link">View on GitHub &#8599;</a>
+            <a href="https://github.com/ashishkumar62649/god-eyes" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
           </div>
         </div>
       </div>
@@ -141,11 +201,11 @@
     <!-- Tools -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
+        <div class="reveal">
           <p class="section-eyebrow">Tools</p>
           <h2 class="section-title">What I work with</h2>
         </div>
-        <div class="tools-grid fade-in">
+        <div class="tools-grid reveal reveal-delay-1">
           <div class="tool-cell">Python</div>
           <div class="tool-cell">SQL</div>
           <div class="tool-cell">Pandas</div>
@@ -166,28 +226,28 @@
     <!-- Writing Preview -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
+        <div class="reveal">
           <p class="section-eyebrow">Writing</p>
           <h2 class="section-title">Thoughts &amp; notes</h2>
           <p class="section-desc">Technical writing, project reflections, and honest write-ups about what I'm learning.</p>
         </div>
         <div class="writing-grid">
-          <div class="writing-card fade-in">
+          <div class="writing-card reveal reveal-delay-1">
             <p class="writing-card-tag">Project Reflection</p>
             <h3 class="writing-card-title">What I learned while building my first ML anomaly detection project</h3>
             <p class="writing-card-date">Coming soon</p>
           </div>
-          <div class="writing-card fade-in">
+          <div class="writing-card reveal reveal-delay-2">
             <p class="writing-card-tag">Technical</p>
             <h3 class="writing-card-title">Why SQL matters for data science internships</h3>
             <p class="writing-card-date">Coming soon</p>
           </div>
-          <div class="writing-card fade-in">
+          <div class="writing-card reveal reveal-delay-3">
             <p class="writing-card-tag">Career</p>
             <h3 class="writing-card-title">My roadmap for learning AI and data science</h3>
             <p class="writing-card-date">Coming soon</p>
           </div>
-          <div class="writing-card fade-in">
+          <div class="writing-card reveal reveal-delay-4">
             <p class="writing-card-tag">Personal</p>
             <h3 class="writing-card-title">How I am rebuilding my tech career through projects</h3>
             <p class="writing-card-date">Coming soon</p>
@@ -201,11 +261,11 @@
     <!-- Roadmap -->
     <section class="section">
       <div class="container">
-        <div class="fade-in">
+        <div class="reveal">
           <p class="section-eyebrow">Roadmap</p>
           <h2 class="section-title">Where things stand</h2>
         </div>
-        <div class="roadmap fade-in">
+        <div class="roadmap reveal reveal-delay-1">
           <div class="roadmap-group">
             <h3 class="roadmap-group-title"><span class="roadmap-dot dot-green"></span> Published</h3>
             <div class="roadmap-items">
@@ -240,7 +300,7 @@
 
     <!-- Contact CTA -->
     <section class="contact-cta">
-      <div class="container fade-in">
+      <div class="container reveal">
         <p class="section-eyebrow">Contact</p>
         <h2 class="section-title">Let's connect</h2>
         <p class="section-desc">Open to data analysis, Python development, AI/ML, and data science internships.</p>
@@ -253,6 +313,7 @@
     </section>
   </div>
 
+  <!-- Footer -->
   <footer class="footer">
     <div class="container">
       <div class="footer-inner">
