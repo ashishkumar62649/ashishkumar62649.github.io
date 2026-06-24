@@ -8,6 +8,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
@@ -22,13 +23,13 @@
         <span></span><span></span><span></span>
       </button>
       <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="active">Home</a></li>
-        <li><a href="projects.html">Projects</a></li>
-        <li><a href="writing.html">Writing</a></li>
-        <li><a href="learning.html">Learning</a></li>
-        <li><a href="research-notes.html">Research &amp; Notes</a></li>
-        <li><a href="resume.html">Resume</a></li>
-        <li><a href="contact.html">Contact</a></li>
+        <li><a href="index.html" class="roll-link active"><span class="roll-inner"><span class="roll-current">Home</span><span class="roll-hover">Home</span></span></a></li>
+        <li><a href="projects.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Projects</span><span class="roll-hover">Projects</span></span></a></li>
+        <li><a href="writing.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Writing</span><span class="roll-hover">Writing</span></span></a></li>
+        <li><a href="learning.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Learning</span><span class="roll-hover">Learning</span></span></a></li>
+        <li><a href="research-notes.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Research &amp; Notes</span><span class="roll-hover">Research &amp; Notes</span></span></a></li>
+        <li><a href="resume.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Resume</span><span class="roll-hover">Resume</span></span></a></li>
+        <li><a href="contact.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Contact</span><span class="roll-hover">Contact</span></span></a></li>
         <li><button class="nav-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
       </ul>
     </div>
@@ -40,26 +41,19 @@
     <div class="hero-wrapper">
       <div class="hero-pinned">
         <div class="hero-motion">
-          <!-- Top bar -->
           <div class="hero-top-bar">
             <span class="hero-eyebrow">Data Science / AI / Systems</span>
             <span class="hero-year">/Building since 2024</span>
           </div>
-
-          <!-- Huge heading -->
           <h1 class="hero-heading">
             <span class="line"><span>DATA SCIENCE</span></span>
             <span class="line"><span>&amp; AI SYSTEMS</span></span>
           </h1>
-
-          <!-- Profile card -->
           <div class="hero-card-wrap">
             <div class="hero-card">
               <img src="assets/profile.png" alt="Ashish Kumar">
             </div>
           </div>
-
-          <!-- Decorations -->
           <div class="hero-deco hero-deco-star"></div>
           <div class="hero-deco hero-deco-orbit"></div>
           <div class="hero-deco hero-deco-dot"></div>
@@ -68,7 +62,7 @@
       </div>
     </div>
 
-    <!-- ===== About (Slides over hero) ===== -->
+    <!-- ===== About ===== -->
     <section class="about-section">
       <div class="container">
         <div class="about-grid">
@@ -77,6 +71,9 @@
             <h2 class="about-heading">Hey!</h2>
             <p class="about-text">I'm Ashish, a Data Science and AI student based in Bangalore, building my path through Python, SQL, machine learning, AI tools, writing, and consistent projects.</p>
             <p class="about-text">I'm interested in how intelligence, data, and software systems come together to solve real problems.</p>
+            <div style="margin-top: 1.5rem;">
+              <a href="projects.html" class="btn btn-ghost">View Projects</a>
+            </div>
           </div>
           <div class="about-card reveal reveal-delay-2">
             <img src="assets/profile.png" alt="Ashish Kumar">
@@ -184,25 +181,63 @@
 
     <div class="container"><hr class="sep"></div>
 
-    <!-- Tools -->
-    <section class="section">
+    <!-- Tools & Stack (Categorized) -->
+    <section class="tools-section">
       <div class="container">
-        <div class="reveal">
-          <p class="section-eyebrow">Tools</p>
-          <h2 class="section-title">What I work with</h2>
+        <div class="tools-header reveal">
+          <p class="section-eyebrow">Stack</p>
+          <h2 class="section-title">Tools &amp; Stack</h2>
         </div>
-        <div class="tools-grid reveal reveal-delay-1">
-          <div class="tool-cell">Python</div>
-          <div class="tool-cell">SQL</div>
-          <div class="tool-cell">Pandas</div>
-          <div class="tool-cell">NumPy</div>
-          <div class="tool-cell">Matplotlib</div>
-          <div class="tool-cell">Scikit-learn</div>
-          <div class="tool-cell">Streamlit</div>
-          <div class="tool-cell">Git</div>
-          <div class="tool-cell">GitHub</div>
-          <div class="tool-cell">CLI Tools</div>
-          <div class="tool-cell">LLM Tools</div>
+
+        <div class="tools-category reveal">
+          <p class="tools-category-label">Languages</p>
+          <div class="tools-items">
+            <div class="tool-item"><i class="devicon-python-plain"></i><span>Python</span></div>
+            <div class="tool-item"><i class="devicon-c-plain"></i><span>C</span></div>
+            <div class="tool-item"><i class="devicon-mysql-plain"></i><span>SQL</span></div>
+          </div>
+        </div>
+
+        <div class="tools-category reveal">
+          <p class="tools-category-label">Data &amp; ML</p>
+          <div class="tools-items">
+            <div class="tool-item"><i class="devicon-pandas-original"></i><span>Pandas</span></div>
+            <div class="tool-item"><i class="devicon-numpy-original"></i><span>NumPy</span></div>
+            <div class="tool-item"><i class="devicon-matplotlib-plain"></i><span>Matplotlib</span></div>
+            <div class="tool-item"><i class="devicon-scikit-learn-plain"></i><span>Scikit-learn</span></div>
+            <div class="tool-item"><i class="devicon-jupyter-plain"></i><span>Jupyter</span></div>
+          </div>
+        </div>
+
+        <div class="tools-category reveal">
+          <p class="tools-category-label">AI Tools</p>
+          <div class="tools-items">
+            <div class="tool-item"><i class="devicon-openai-plain"></i><span>LLM Tools</span></div>
+            <div class="tool-item"><span style="font-size: 1.1rem; color: var(--text-secondary);">&#9998;</span><span>Prompt Engineering</span></div>
+            <div class="tool-item"><span style="font-size: 1.1rem; color: var(--text-secondary);">&#8644;</span><span>RAG Basics</span></div>
+            <div class="tool-item"><i class="devicon-bash-plain"></i><span>AI-assisted CLI</span></div>
+          </div>
+        </div>
+
+        <div class="tools-category reveal">
+          <p class="tools-category-label">Web / App</p>
+          <div class="tools-items">
+            <div class="tool-item"><i class="devicon-html5-plain"></i><span>HTML</span></div>
+            <div class="tool-item"><i class="devicon-css3-plain"></i><span>CSS</span></div>
+            <div class="tool-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
+            <div class="tool-item"><i class="devicon-streamlit-plain"></i><span>Streamlit</span></div>
+          </div>
+        </div>
+
+        <div class="tools-category reveal">
+          <p class="tools-category-label">Tools</p>
+          <div class="tools-items">
+            <div class="tool-item"><i class="devicon-git-plain"></i><span>Git</span></div>
+            <div class="tool-item"><i class="devicon-github-plain"></i><span>GitHub</span></div>
+            <div class="tool-item"><i class="devicon-vscode-plain"></i><span>VS Code</span></div>
+            <div class="tool-item"><i class="devicon-bash-plain"></i><span>CLI</span></div>
+            <div class="tool-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
+          </div>
         </div>
       </div>
     </section>

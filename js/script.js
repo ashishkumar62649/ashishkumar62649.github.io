@@ -43,9 +43,26 @@ function initMenu() {
 /* ===== Active Nav ===== */
 function setActive() {
   const page = window.location.pathname.split('/').pop() || 'index.html';
-  document.querySelectorAll('.nav-links a').forEach(a => {
-    const href = a.getAttribute('href');
-    if (href === page || (page === '' && href === 'index.html')) a.classList.add('active');
+  document.querySelectorAll('.nav-links a, .nav-links .roll-link').forEach(el => {
+    const href = el.getAttribute('href');
+    if (href === page || (page === '' && href === 'index.html')) {
+      el.classList.add('active');
+    }
+  });
+}
+
+/* ===== Rolling Text Hover ===== */
+function initRollingText() {
+  const rollLinks = document.querySelectorAll('.roll-link');
+  rollLinks.forEach(link => {
+    const current = link.querySelector('.roll-current');
+    const hover = link.querySelector('.roll-hover');
+    if (current && hover) {
+      // Make sure hover text is positioned below
+      hover.style.position = 'absolute';
+      hover.style.top = '1.2em';
+      hover.style.left = '0';
+    }
   });
 }
 
@@ -69,10 +86,7 @@ function initHeroScroll() {
   const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   if (prefersReduced) return;
 
-  // The scroll distance over which the hero animation plays
-  // After this distance, the hero is fully scrolled out
   const ANIM_DISTANCE = window.innerHeight * 0.8;
-
   let ticking = false;
 
   function onScroll() {
@@ -80,53 +94,39 @@ function initHeroScroll() {
     ticking = true;
     requestAnimationFrame(() => {
       const scrollY = window.scrollY;
-
-      // Progress from 0 (top) to 1 (fully scrolled)
       const progress = Math.min(scrollY / ANIM_DISTANCE, 1);
 
-      // --- Hero heading: moves up and fades ---
-      const headingY = progress * -120; // move up by 120px
+      // Hero heading: moves up and fades
+      const headingY = progress * -120;
       const headingOpacity = 1 - progress * 1.5;
       heroMotion.style.transform = `translateY(${headingY}px)`;
       heroMotion.style.opacity = Math.max(headingOpacity, 0);
 
-      // --- Top bar: moves up and fades ---
+      // Top bar: moves up and fades
       if (heroTopBar) {
         heroTopBar.style.transform = `translateY(${headingY * 0.6}px)`;
         heroTopBar.style.opacity = Math.max(headingOpacity, 0);
       }
 
-      // --- Profile card: 3D rotation on Y axis ---
+      // Profile card: 3D rotation on Y axis
       if (heroCard) {
-        // Card rotates from 0deg to 90deg (edge-on) back to 0deg
-        // This creates the "turning card" effect
-        let rotateY;
-        let cardScale;
-        let cardOpacity;
-
+        let rotateY, cardScale, cardOpacity;
         if (progress < 0.5) {
-          // First half: rotate toward edge-on
-          rotateY = progress * 2 * 85; // 0 -> 85 degrees
-          cardScale = 1 - progress * 0.3; // 1 -> 0.85
+          rotateY = progress * 2 * 85;
+          cardScale = 1 - progress * 0.3;
           cardOpacity = 1 - progress * 0.4;
         } else {
-          // Second half: rotate back from edge-on
-          rotateY = (1 - progress) * 2 * 85; // 85 -> 0 degrees
-          cardScale = 0.7 + (progress - 0.5) * 0.6; // 0.7 -> 1
+          rotateY = (1 - progress) * 2 * 85;
+          cardScale = 0.7 + (progress - 0.5) * 0.6;
           cardOpacity = 0.6 + (progress - 0.5) * 0.8;
         }
-
-        // Move card slightly up
         const cardY = progress * -30;
-
         heroCard.style.transform =
-          `translateY(${cardY}px) ` +
-          `scale(${cardScale}) ` +
-          `perspective(800px) rotateY(${rotateY}deg)`;
+          `translateY(${cardY}px) scale(${cardScale}) perspective(800px) rotateY(${rotateY}deg)`;
         heroCard.style.opacity = Math.max(Math.min(cardOpacity, 1), 0);
       }
 
-      // --- Decorations: parallax ---
+      // Decorations: parallax
       heroDecos.forEach((d, i) => {
         const speed = 0.02 + i * 0.01;
         const rotate = scrollY * (0.008 + i * 0.003);
@@ -151,7 +151,6 @@ function initCardTilt() {
       const rect = card.getBoundingClientRect();
       const x = (e.clientX - rect.left) / rect.width - 0.5;
       const y = (e.clientY - rect.top) / rect.height - 0.5;
-      // Only apply tilt if not being animated by scroll
       if (window.scrollY < 50) {
         card.style.transform = `perspective(800px) rotateY(${x * 10}deg) rotateX(${-y * 10}deg) scale(1.03)`;
       }
@@ -170,6 +169,7 @@ document.addEventListener('DOMContentLoaded', () => {
   createStars();
   initMenu();
   setActive();
+  initRollingText();
   initReveal();
   initHeroScroll();
   initCardTilt();
