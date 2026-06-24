@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Writing — Ashish Kumar</title>
-  <meta name="description" content="Technical writing, project reflections, and learning notes by Ashish Kumar.">
+  <meta name="description" content="Technical writing and project reflections by Ashish Kumar.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -12,31 +12,33 @@
 </head>
 <body>
 
-  <div class="stars-container" id="stars-container"></div>
+  <div id="stars"></div>
 
-  <nav class="navbar">
-    <a href="index.html" class="nav-brand">Ashish<span>.</span></a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="writing.html" class="active">Writing</a></li>
-      <li><a href="learning.html">Learning</a></li>
-      <li><a href="research-notes.html">Research &amp; Notes</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
-    </ul>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Ashish Kumar</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="writing.html" class="active">Writing</a></li>
+        <li><a href="learning.html">Learning</a></li>
+        <li><a href="research-notes.html">Research &amp; Notes</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="nav-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
+      </ul>
+    </div>
   </nav>
 
   <div class="page-content">
     <div class="container">
       <div class="page-header fade-in">
-        <p class="section-label">Writing</p>
+        <p class="section-eyebrow">Writing</p>
         <h1 class="section-title">Writing</h1>
-        <p class="section-subtitle">Technical notes, project reflections, and honest write-ups about what I'm learning and building.</p>
+        <p class="section-desc">Technical notes, project reflections, and honest write-ups about what I'm learning and building.</p>
       </div>
     </div>
 
@@ -44,34 +46,34 @@
       <div class="container">
         <div class="writing-grid">
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Project Reflection</span>
+            <p class="writing-card-tag">Project Reflection</p>
             <h3 class="writing-card-title">What I learned while building my first ML anomaly detection project</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Technical</span>
+            <p class="writing-card-tag">Technical</p>
             <h3 class="writing-card-title">Why SQL matters for data science internships</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Career</span>
+            <p class="writing-card-tag">Career</p>
             <h3 class="writing-card-title">My roadmap for learning AI and data science</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Technical</span>
+            <p class="writing-card-tag">Technical</p>
             <h3 class="writing-card-title">Notes on Python data cleaning</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Project Reflection</span>
+            <p class="writing-card-tag">Project Reflection</p>
             <h3 class="writing-card-title">Building a CSV chatbot with Streamlit</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
           <div class="writing-card fade-in">
-            <span class="writing-card-tag">Personal</span>
+            <p class="writing-card-tag">Personal</p>
             <h3 class="writing-card-title">How I am rebuilding my tech career through projects</h3>
-            <p class="writing-card-date">Coming Soon</p>
+            <p class="writing-card-date">Coming soon</p>
           </div>
         </div>
       </div>
@@ -80,8 +82,8 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
+      <div class="footer-inner">
+        <div class="footer-text">
           <h3>Ashish Kumar</h3>
           <p>Exploring intelligence through data, code, and systems.</p>
         </div>
@@ -108,8 +110,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Ashish Kumar. All rights reserved.</p>
-        <div class="footer-social">
+        <p>&copy; 2026 Ashish Kumar</p>
+        <div class="footer-bottom-links">
           <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
           <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
         </div>

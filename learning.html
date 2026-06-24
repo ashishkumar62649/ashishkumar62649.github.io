@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Learning — Ashish Kumar</title>
-  <meta name="description" content="Learning journey of Ashish Kumar in data science, AI, and software systems.">
+  <meta name="description" content="Learning journey of Ashish Kumar in data science, AI, and systems.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
@@ -12,39 +12,40 @@
 </head>
 <body>
 
-  <div class="stars-container" id="stars-container"></div>
+  <div id="stars"></div>
 
-  <nav class="navbar">
-    <a href="index.html" class="nav-brand">Ashish<span>.</span></a>
-    <button class="hamburger" id="hamburger" aria-label="Toggle menu" aria-expanded="false">
-      <span></span><span></span><span></span>
-    </button>
-    <ul class="nav-links" id="nav-links">
-      <li><a href="index.html">Home</a></li>
-      <li><a href="projects.html">Projects</a></li>
-      <li><a href="writing.html">Writing</a></li>
-      <li><a href="learning.html" class="active">Learning</a></li>
-      <li><a href="research-notes.html">Research &amp; Notes</a></li>
-      <li><a href="resume.html">Resume</a></li>
-      <li><a href="contact.html">Contact</a></li>
-      <li><button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
-    </ul>
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="index.html" class="nav-logo">Ashish Kumar</a>
+      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
+        <span></span><span></span><span></span>
+      </button>
+      <ul class="nav-links" id="nav-links">
+        <li><a href="index.html">Home</a></li>
+        <li><a href="projects.html">Projects</a></li>
+        <li><a href="writing.html">Writing</a></li>
+        <li><a href="learning.html" class="active">Learning</a></li>
+        <li><a href="research-notes.html">Research &amp; Notes</a></li>
+        <li><a href="resume.html">Resume</a></li>
+        <li><a href="contact.html">Contact</a></li>
+        <li><button class="nav-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
+      </ul>
+    </div>
   </nav>
 
   <div class="page-content">
     <div class="container">
       <div class="page-header fade-in">
-        <p class="section-label">Learning</p>
+        <p class="section-eyebrow">Learning</p>
         <h1 class="section-title">Learning</h1>
-        <p class="section-subtitle">Tracking what I'm learning, what I've covered, and where I'm heading next.</p>
+        <p class="section-desc">Tracking what I'm learning, what I've covered, and where I'm heading next.</p>
       </div>
     </div>
 
-    <!-- Currently Learning -->
     <section class="section" style="padding-top: 0;">
       <div class="container">
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Currently Learning</h2>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Currently Learning</h2>
           <ul class="learning-list">
             <li class="learning-item"><span class="learning-dot"></span> Python for data analysis</li>
             <li class="learning-item"><span class="learning-dot"></span> SQL analytics</li>
@@ -55,46 +56,34 @@
           </ul>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Courses</h2>
-          <div class="research-message">
-            <p>Coming soon. Will list courses I've completed or am currently following across platforms.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Courses</h2>
+          <div class="placeholder-block">Coming soon. Will list courses I've completed or am currently following.</div>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Books</h2>
-          <div class="research-message">
-            <p>Coming soon. Books and reading material that are shaping my understanding of data, AI, and systems.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Books</h2>
+          <div class="placeholder-block">Coming soon. Books and material shaping my understanding of data, AI, and systems.</div>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Math &amp; Statistics Notes</h2>
-          <div class="research-message">
-            <p>Coming soon. Notes on probability, statistics, linear algebra, and the math behind machine learning.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Math &amp; Statistics Notes</h2>
+          <div class="placeholder-block">Coming soon. Notes on probability, statistics, and the math behind machine learning.</div>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Python / SQL Practice</h2>
-          <div class="research-message">
-            <p>Coming soon. Practice problems, solutions, and code snippets from my Python and SQL learning.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Python / SQL Practice</h2>
+          <div class="placeholder-block">Coming soon. Practice problems, solutions, and code snippets from my learning.</div>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">AI / ML Roadmap</h2>
-          <div class="research-message">
-            <p>Coming soon. A structured roadmap for learning AI and machine learning from fundamentals to applications.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">AI / ML Roadmap</h2>
+          <div class="placeholder-block">Coming soon. A structured roadmap for learning AI and machine learning.</div>
         </div>
 
-        <div class="learning-section fade-in">
-          <h2 class="learning-section-title">Weekly Learning Log</h2>
-          <div class="research-message">
-            <p>Coming soon. A regular log of what I studied, built, and learned each week.</p>
-          </div>
+        <div class="learning-group fade-in">
+          <h2 class="learning-group-title">Weekly Learning Log</h2>
+          <div class="placeholder-block">Coming soon. A regular log of what I studied, built, and learned each week.</div>
         </div>
       </div>
     </section>
@@ -102,8 +91,8 @@
 
   <footer class="footer">
     <div class="container">
-      <div class="footer-content">
-        <div class="footer-brand">
+      <div class="footer-inner">
+        <div class="footer-text">
           <h3>Ashish Kumar</h3>
           <p>Exploring intelligence through data, code, and systems.</p>
         </div>
@@ -130,8 +119,8 @@
         </div>
       </div>
       <div class="footer-bottom">
-        <p>&copy; 2026 Ashish Kumar. All rights reserved.</p>
-        <div class="footer-social">
+        <p>&copy; 2026 Ashish Kumar</p>
+        <div class="footer-bottom-links">
           <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
           <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
         </div>
