@@ -1838,6 +1838,12 @@ body.is-editing .stack-tool {
   pointer-events: none;
 }
 
+body.is-editing .footer-name {
+  z-index: 2;
+  pointer-events: auto;
+  cursor: text;
+}
+
 [data-reveal] {
   opacity: 0;
   transform: translate(-50%, 18px);
