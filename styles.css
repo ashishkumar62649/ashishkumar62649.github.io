@@ -1370,6 +1370,26 @@ body.is-editing .category-add-tool {
   display: inline-grid;
 }
 
+.stack-category-add {
+  display: none;
+  grid-column: 1 / 2;
+  justify-self: start;
+  align-self: center;
+  min-height: 34px;
+  padding: 0 12px;
+  border: 1px solid color-mix(in srgb, var(--ink) 24%, transparent);
+  border-radius: 8px;
+  background: color-mix(in srgb, var(--ink) 12%, transparent);
+  color: var(--ink);
+  font-size: 0.92rem;
+  font-weight: 800;
+}
+
+body.is-editing .stack-category-add {
+  display: inline-flex;
+  align-items: center;
+}
+
 body.is-editing .stack-tool {
   gap: 8px;
 }
@@ -1615,6 +1635,11 @@ body.is-editing .stack-tool {
   gap: 14px;
 }
 
+.social-link-item {
+  position: relative;
+  display: inline-grid;
+}
+
 .social-links a {
   display: inline-grid;
   place-items: center;
@@ -1638,6 +1663,20 @@ body.is-editing .stack-tool {
   background: rgba(244, 240, 232, 0.2);
 }
 
+.social-icon-slot {
+  display: inline-grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  color: currentColor;
+  font-size: 0.9rem;
+  font-weight: 800;
+}
+
+body.is-editing .social-icon-slot[data-edit-kind="image"] {
+  cursor: pointer;
+}
+
 .social-links img {
   display: block;
   width: 18px;
@@ -1648,6 +1687,27 @@ body.is-editing .stack-tool {
 
 :root[data-theme="dark"] .social-links img {
   filter: invert(1);
+}
+
+.social-delete-icon {
+  top: -8px;
+  right: -8px;
+  width: 20px;
+  height: 20px;
+  border-radius: 7px;
+  font-size: 0;
+}
+
+.social-delete-icon::before {
+  content: "x";
+  font-size: 0.72rem;
+}
+
+.social-add-icon {
+  width: 40px;
+  height: 40px;
+  margin-top: 0;
+  border-radius: 8px;
 }
 
 .contact-form {

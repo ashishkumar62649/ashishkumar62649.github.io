@@ -469,6 +469,12 @@ const deleteIcon = (type, index) =>
 const addIcon = (type) =>
   editorAvailable ? `<button class="inline-add-icon" type="button" data-add-card="${type}" aria-label="Add ${type}" title="Add ${type}">+</button>` : "";
 
+const socialDeleteIcon = (index) =>
+  editorAvailable ? `<button class="inline-delete-icon social-delete-icon" type="button" data-delete-social-link="${index}" aria-label="Delete social link" title="Delete">Ã—</button>` : "";
+
+const socialAddIcon = () =>
+  editorAvailable ? `<button class="inline-add-icon social-add-icon" type="button" data-add-social-link aria-label="Add social link" title="Add social link">+</button>` : "";
+
 const renderProjects = () => {
   const list = $("[data-projects-list]");
   const content = currentContent();
@@ -518,6 +524,7 @@ const renderSkills = () => {
       <button class="category-add-tool" type="button" data-add-skill-category="${escapeHtml(category)}" aria-label="Add tool to ${escapeHtml(category)}" title="Add tool">+</button>
     </div>
   `).join("");
+  list.insertAdjacentHTML("beforeend", editorAvailable ? `<button class="stack-category-add" type="button" data-add-skill-category-root aria-label="Add stack category" title="Add stack category">+ Category</button><span></span>` : "");
 };
 
 const renderLearning = () => {
@@ -593,11 +600,15 @@ const renderContact = () => {
   const socialLinks = $("[data-social-links]");
   if (socialLinks) {
     socialLinks.innerHTML = normalizeArray(content.contact.socialLinks).map((item, index) => `
-      <a href="${escapeHtml(item.url || "#")}" aria-label="${escapeHtml(item.label)}" class="editable-card social-link-arrow" data-edit-path="contact.socialLinks.${index}.url" data-edit-kind="url">
-        ${item.icon ? `<img src="${escapeHtml(item.icon)}" alt="" data-edit-path="contact.socialLinks.${index}.icon" data-edit-kind="image" />` : `<span data-edit-path="contact.socialLinks.${index}.label">${escapeHtml((item.label || "?").slice(0, 1))}</span>`}
-        ${editorIcon(`contact.socialLinks.${index}.url`, "url", "Edit social link")}
-      </a>
-    `).join("");
+      <span class="social-link-item editable-card">
+        <a href="${escapeHtml(item.url || "#")}" aria-label="${escapeHtml(item.label || "Social link")}" class="social-link-arrow" data-edit-path="contact.socialLinks.${index}.url" data-edit-kind="url">
+          <span class="social-icon-slot" data-edit-path="contact.socialLinks.${index}.icon" data-edit-kind="image" title="Replace icon">
+            ${item.icon ? `<img src="${escapeHtml(item.icon)}" alt="" />` : `<span>${escapeHtml((item.label || "?").slice(0, 1))}</span>`}
+          </span>
+        </a>
+        ${socialDeleteIcon(index)}
+      </span>
+    `).join("") + socialAddIcon();
   }
   const footerEmail = $("[data-footer-email]");
   if (footerEmail) {
@@ -878,12 +889,34 @@ const handleEditorClick = async (event) => {
   const editButton = event.target.closest("[data-inline-edit-group]");
   const addButton = event.target.closest("[data-add-card]");
   const addSkillButton = event.target.closest("[data-add-skill-category]");
+  const addSkillCategoryButton = event.target.closest("[data-add-skill-category-root]");
+  const addSocialButton = event.target.closest("[data-add-social-link]");
+  const deleteSocialButton = event.target.closest("[data-delete-social-link]");
   const deleteButton = event.target.closest("[data-delete-card]");
   const editableImage = event.target.closest("[data-edit-kind='image']");
   const editableField = event.target.closest("[data-edit-path]");
   const inlineLink = event.target.closest("a.inline-text-link, a.element-link-wrap, a.link-with-arrow");
 
-  if (!editMode && (editButton || addButton || addSkillButton || deleteButton || editableImage)) return;
+  if (!editMode && (editButton || addButton || addSkillButton || addSkillCategoryButton || addSocialButton || deleteSocialButton || deleteButton || editableImage)) return;
+
+  if (editMode && addSkillCategoryButton) {
+    event.preventDefault();
+    event.stopPropagation();
+    addSkillCategory();
+    return;
+  }
+  if (editMode && addSocialButton) {
+    event.preventDefault();
+    event.stopPropagation();
+    addSocialLink();
+    return;
+  }
+  if (editMode && deleteSocialButton) {
+    event.preventDefault();
+    event.stopPropagation();
+    deleteSocialLink(Number(deleteSocialButton.dataset.deleteSocialLink));
+    return;
+  }
 
   if (editMode && editableImage) {
     event.preventDefault();
@@ -1477,6 +1510,54 @@ const addSkillToCategory = (category) => {
   saveDraft();
   renderContent();
   toast(`New ${category} tool added to draft`);
+};
+
+const addSkillCategory = () => {
+  const baseName = "New category";
+  const existing = new Set(normalizeArray(draftContent.skills).map((skill) => skill.category || "Tools"));
+  let category = baseName;
+  let suffix = 2;
+  while (existing.has(category)) {
+    category = `${baseName} ${suffix}`;
+    suffix += 1;
+  }
+  pushGlobalHistory();
+  draftContent.skills.push({
+    name: "New skill",
+    category,
+    description: "Description",
+    icon: ""
+  });
+  saveDraft();
+  renderContent();
+  toast("New stack category added to draft");
+};
+
+const addSocialLink = () => {
+  pushGlobalHistory();
+  draftContent.contact = draftContent.contact || {};
+  draftContent.contact.socialLinks = normalizeArray(draftContent.contact.socialLinks);
+  draftContent.contact.socialLinks.push({
+    label: "New link",
+    url: "#",
+    icon: ""
+  });
+  saveDraft();
+  renderContent();
+  toast("New social link added to draft");
+};
+
+const deleteSocialLink = (index) => {
+  const links = normalizeArray(draftContent.contact?.socialLinks);
+  if (!links[index] || !window.confirm("Delete this social link?")) return;
+  pushGlobalHistory();
+  links.splice(index, 1);
+  draftContent.contact.socialLinks = links;
+  saveDraft();
+  activeGroup = null;
+  activeEditable = null;
+  renderContent();
+  toast("Social link removed from draft");
 };
 
 const deleteCard = (type, index) => {
