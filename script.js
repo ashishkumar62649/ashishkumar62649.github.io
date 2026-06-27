@@ -93,7 +93,8 @@ const defaultContent = {
       { text: "Contact", url: "#contact" }
     ]
   },
-  elementLinks: {}
+  elementLinks: {},
+  layout: {}
 };
 
 const draftKey = "portfolio-editor-draft";
@@ -111,6 +112,10 @@ let contextLinkTarget = null;
 let phaseWords = [];
 let stackRows = [];
 let inlineControlFrame = 0;
+let selectedLayoutKeys = [];
+let activeLayoutGesture = null;
+const layoutSnap = 8;
+const rotateSnap = 5;
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => Array.from(root.querySelectorAll(selector));
@@ -181,6 +186,7 @@ const mergeContent = (content = {}) => ({
   },
   footer: { ...defaultContent.footer, ...content.footer },
   elementLinks: { ...defaultContent.elementLinks, ...content.elementLinks },
+  layout: { ...defaultContent.layout, ...content.layout },
   projects: normalizeArray(content.projects),
   skills: normalizeArray(content.skills),
   learning: normalizeArray(content.learning),
@@ -430,6 +436,282 @@ const setEditGroup = (element, group, label = "Edit") => {
   element.dataset.editLabel = label;
 };
 
+const getLayoutEntry = (key) => draftContent.layout?.[key] || {};
+
+const hasCustomLayout = (entry = {}) =>
+  Number(entry.x || 0) !== 0 ||
+  Number(entry.y || 0) !== 0 ||
+  Number(entry.rotate || 0) !== 0 ||
+  Number(entry.z || 0) !== 0 ||
+  Boolean(entry.locked);
+
+const setLayoutEntry = (key, patch) => {
+  if (!key) return;
+  draftContent.layout = draftContent.layout || {};
+  const next = {
+    x: 0,
+    y: 0,
+    rotate: 0,
+    z: 0,
+    locked: false,
+    ...getLayoutEntry(key),
+    ...patch
+  };
+  if (hasCustomLayout(next)) {
+    draftContent.layout[key] = next;
+  } else {
+    delete draftContent.layout[key];
+  }
+};
+
+const snapValue = (value, snap = layoutSnap) => Math.round(value / snap) * snap;
+
+const getLayoutKeyForElement = (element) => {
+  if (!element) return "";
+  if (element.dataset.layoutKey) return element.dataset.layoutKey;
+  if (element.dataset.editPath) return element.dataset.editPath;
+  if (element.dataset.editGroup) return `group.${element.dataset.editGroup}`;
+  return "";
+};
+
+const assignLayoutKeys = () => {
+  if (!editorAvailable) return;
+  $$("[data-edit-group], [data-edit-path], [data-layout-key], [data-link-key]").forEach((element) => {
+    if (element.closest(".global-editor-dock, .editor-context-menu, .block-history-popover")) return;
+    if (!element.dataset.layoutKey) {
+      element.dataset.layoutKey = getLayoutKeyForElement(element) || element.dataset.linkKey || "";
+    }
+    if (element.dataset.layoutKey) element.classList.add("layout-target");
+  });
+};
+
+const getLayoutTargets = (key) =>
+  key ? $$(`[data-layout-key="${CSS.escape(key)}"]`).filter((element) => element.isConnected) : [];
+
+const applyLayoutTransforms = () => {
+  $$("[data-layout-key]").forEach((element) => {
+    const key = element.dataset.layoutKey;
+    const entry = getLayoutEntry(key);
+    const x = Number(entry.x || 0);
+    const y = Number(entry.y || 0);
+    const rotate = Number(entry.rotate || 0);
+    const z = Number(entry.z || 0);
+    const locked = Boolean(entry.locked);
+    if (hasCustomLayout(entry)) {
+      element.classList.add("is-layout-positioned");
+      element.style.setProperty("--layout-x", `${x}px`);
+      element.style.setProperty("--layout-y", `${y}px`);
+      element.style.setProperty("--layout-rotate", `${rotate}deg`);
+      element.style.zIndex = z ? String(z) : "";
+    } else {
+      element.classList.remove("is-layout-positioned");
+      element.style.removeProperty("--layout-x");
+      element.style.removeProperty("--layout-y");
+      element.style.removeProperty("--layout-rotate");
+      element.style.zIndex = "";
+    }
+    element.classList.toggle("is-layout-locked", locked);
+  });
+  positionLayoutOverlay();
+};
+
+const getLayoutClickTarget = (node) => {
+  const element = node?.closest?.("[data-layout-key], [data-edit-path], [data-edit-group], [data-link-key]");
+  if (!element || element.closest(".global-editor-dock, .editor-context-menu, .block-history-popover, .layout-selection-overlay")) return null;
+  return element;
+};
+
+const getSelectedLayoutElements = () =>
+  selectedLayoutKeys.flatMap((key) => getLayoutTargets(key)).filter((element, index, list) => list.indexOf(element) === index);
+
+const getSelectionRect = () => {
+  const rects = getSelectedLayoutElements()
+    .map((element) => element.getBoundingClientRect())
+    .filter((rect) => rect.width > 0 && rect.height > 0);
+  if (rects.length === 0) return null;
+  return {
+    left: Math.min(...rects.map((rect) => rect.left)),
+    top: Math.min(...rects.map((rect) => rect.top)),
+    right: Math.max(...rects.map((rect) => rect.right)),
+    bottom: Math.max(...rects.map((rect) => rect.bottom))
+  };
+};
+
+const selectLayoutTarget = (element, append = false) => {
+  const key = getLayoutKeyForElement(element);
+  if (!key) return;
+  if (append) {
+    selectedLayoutKeys = selectedLayoutKeys.includes(key)
+      ? selectedLayoutKeys.filter((item) => item !== key)
+      : [...selectedLayoutKeys, key];
+  } else {
+    selectedLayoutKeys = [key];
+  }
+  document.body.classList.add("has-layout-selection");
+  renderLayoutSelection();
+};
+
+const clearLayoutSelection = () => {
+  selectedLayoutKeys = [];
+  document.body.classList.remove("has-layout-selection");
+  renderLayoutSelection();
+};
+
+const renderLayoutSelection = () => {
+  $$("[data-layout-key]").forEach((element) => element.classList.toggle("is-layout-selected", selectedLayoutKeys.includes(element.dataset.layoutKey)));
+  const overlay = $(".layout-selection-overlay");
+  if (!overlay) return;
+  overlay.hidden = !editMode || selectedLayoutKeys.length === 0;
+  if (!overlay.hidden) {
+    const entry = getLayoutEntry(selectedLayoutKeys[0]);
+    overlay.classList.toggle("is-locked", Boolean(entry.locked));
+    overlay.querySelector("[data-layout-lock]").textContent = entry.locked ? "Unlock" : "Lock";
+  }
+  positionLayoutOverlay();
+};
+
+const positionLayoutOverlay = () => {
+  const overlay = $(".layout-selection-overlay");
+  if (!overlay || overlay.hidden) return;
+  const rect = getSelectionRect();
+  if (!rect) {
+    overlay.hidden = true;
+    return;
+  }
+  overlay.style.left = `${rect.left + window.scrollX}px`;
+  overlay.style.top = `${rect.top + window.scrollY}px`;
+  overlay.style.width = `${Math.max(24, rect.right - rect.left)}px`;
+  overlay.style.height = `${Math.max(24, rect.bottom - rect.top)}px`;
+};
+
+const showLayoutGuides = (rect) => {
+  const vGuide = $(".layout-guide-v");
+  const hGuide = $(".layout-guide-h");
+  if (!vGuide || !hGuide || !rect) return;
+  const centerX = rect.left + rect.width / 2;
+  const centerY = rect.top + rect.height / 2;
+  const viewportCenterX = window.innerWidth / 2;
+  const viewportCenterY = window.innerHeight / 2;
+  const nearX = Math.abs(centerX - viewportCenterX) <= layoutSnap;
+  const nearY = Math.abs(centerY - viewportCenterY) <= layoutSnap;
+  vGuide.hidden = !nearX;
+  hGuide.hidden = !nearY;
+  if (nearX) vGuide.style.left = `${viewportCenterX}px`;
+  if (nearY) hGuide.style.top = `${viewportCenterY}px`;
+};
+
+const hideLayoutGuides = () => {
+  $(".layout-guide-v")?.setAttribute("hidden", "");
+  $(".layout-guide-h")?.setAttribute("hidden", "");
+};
+
+const startLayoutMove = (event) => {
+  if (selectedLayoutKeys.length === 0) return;
+  const locked = selectedLayoutKeys.some((key) => getLayoutEntry(key).locked);
+  if (locked) {
+    toast("Unlock this object before moving it.", true);
+    return;
+  }
+  event.preventDefault();
+  pushGlobalHistory();
+  activeLayoutGesture = {
+    type: "move",
+    pointerId: event.pointerId,
+    startX: event.clientX,
+    startY: event.clientY,
+    startEntries: Object.fromEntries(selectedLayoutKeys.map((key) => [key, { x: 0, y: 0, rotate: 0, z: 0, locked: false, ...getLayoutEntry(key) }]))
+  };
+  document.body.classList.add("is-layout-dragging");
+  event.currentTarget.setPointerCapture(event.pointerId);
+};
+
+const startLayoutRotate = (event) => {
+  if (selectedLayoutKeys.length === 0) return;
+  const locked = selectedLayoutKeys.some((key) => getLayoutEntry(key).locked);
+  if (locked) {
+    toast("Unlock this object before rotating it.", true);
+    return;
+  }
+  const rect = getSelectionRect();
+  if (!rect) return;
+  event.preventDefault();
+  pushGlobalHistory();
+  const center = { x: rect.left + (rect.right - rect.left) / 2, y: rect.top + (rect.bottom - rect.top) / 2 };
+  activeLayoutGesture = {
+    type: "rotate",
+    pointerId: event.pointerId,
+    center,
+    startAngle: Math.atan2(event.clientY - center.y, event.clientX - center.x) * 180 / Math.PI,
+    startEntries: Object.fromEntries(selectedLayoutKeys.map((key) => [key, { x: 0, y: 0, rotate: 0, z: 0, locked: false, ...getLayoutEntry(key) }]))
+  };
+  document.body.classList.add("is-layout-dragging");
+  event.currentTarget.setPointerCapture(event.pointerId);
+};
+
+const updateLayoutGesture = (event) => {
+  if (!activeLayoutGesture || event.pointerId !== activeLayoutGesture.pointerId) return;
+  if (activeLayoutGesture.type === "move") {
+    const dx = snapValue(event.clientX - activeLayoutGesture.startX);
+    const dy = snapValue(event.clientY - activeLayoutGesture.startY);
+    Object.entries(activeLayoutGesture.startEntries).forEach(([key, entry]) => {
+      setLayoutEntry(key, { x: Number(entry.x || 0) + dx, y: Number(entry.y || 0) + dy });
+    });
+  } else {
+    const angle = Math.atan2(event.clientY - activeLayoutGesture.center.y, event.clientX - activeLayoutGesture.center.x) * 180 / Math.PI;
+    const delta = Math.round((angle - activeLayoutGesture.startAngle) / rotateSnap) * rotateSnap;
+    Object.entries(activeLayoutGesture.startEntries).forEach(([key, entry]) => {
+      setLayoutEntry(key, { rotate: Number(entry.rotate || 0) + delta });
+    });
+  }
+  applyLayoutTransforms();
+  const rect = getSelectionRect();
+  if (rect) showLayoutGuides({ left: rect.left, top: rect.top, width: rect.right - rect.left, height: rect.bottom - rect.top });
+};
+
+const finishLayoutGesture = (event) => {
+  if (!activeLayoutGesture || event.pointerId !== activeLayoutGesture.pointerId) return;
+  document.body.classList.remove("is-layout-dragging");
+  hideLayoutGuides();
+  activeLayoutGesture = null;
+  saveDraft();
+  renderLayoutSelection();
+  toast("Layout saved to draft");
+};
+
+const resetSelectedLayout = () => {
+  if (selectedLayoutKeys.length === 0) return;
+  pushGlobalHistory();
+  draftContent.layout = draftContent.layout || {};
+  selectedLayoutKeys.forEach((key) => delete draftContent.layout[key]);
+  saveDraft();
+  applyLayoutTransforms();
+  renderLayoutSelection();
+  toast("Position reset to draft");
+};
+
+const changeSelectedLayer = (direction) => {
+  if (selectedLayoutKeys.length === 0) return;
+  pushGlobalHistory();
+  selectedLayoutKeys.forEach((key) => {
+    const entry = getLayoutEntry(key);
+    setLayoutEntry(key, { z: Math.max(0, Number(entry.z || 0) + direction) });
+  });
+  saveDraft();
+  applyLayoutTransforms();
+  renderLayoutSelection();
+};
+
+const toggleSelectedLock = () => {
+  if (selectedLayoutKeys.length === 0) return;
+  const next = !getLayoutEntry(selectedLayoutKeys[0]).locked;
+  pushGlobalHistory();
+  selectedLayoutKeys.forEach((key) => setLayoutEntry(key, { locked: next }));
+  saveDraft();
+  applyLayoutTransforms();
+  renderLayoutSelection();
+  toast(next ? "Object locked" : "Object unlocked");
+};
+
 const renderTitle = (title) => {
   const lines = richText(title || "Student Developer")
     .split(/\n+/)
@@ -515,7 +797,7 @@ const renderSkills = () => {
     <h3 data-edit-group="skills-${escapeHtml(category)}" data-edit-path="skills.${rows[0].index}.category" data-edit-kind="skill-category" data-edit-category="${escapeHtml(category)}">${escapeHtml(category)}</h3>
     <div class="stack-tools" data-edit-group="skills-${escapeHtml(category)}">
       ${rows.map(({ skill, index }) => `
-        <div class="stack-tool editable-card">
+        <div class="stack-tool editable-card" data-layout-key="skill.${index}">
           ${skill.icon ? `<img src="${escapeHtml(skill.icon)}" alt="" data-edit-path="skills.${index}.icon" data-edit-kind="image" />` : `<span class="skill-icon-placeholder" data-edit-path="skills.${index}.icon" data-edit-kind="image"></span>`}
           <span data-edit-path="skills.${index}.name" data-description-path="skills.${index}.description" title="${escapeHtml(richText(skill.description))}">${renderLinkedText(skill.name)}</span>
           ${deleteIcon("skill", index)}
@@ -600,7 +882,7 @@ const renderContact = () => {
   const socialLinks = $("[data-social-links]");
   if (socialLinks) {
     socialLinks.innerHTML = normalizeArray(content.contact.socialLinks).map((item, index) => `
-      <span class="social-link-item editable-card">
+      <span class="social-link-item editable-card" data-layout-key="contact.socialLinks.${index}">
         <a href="${escapeHtml(item.url || "#")}" aria-label="${escapeHtml(item.label || "Social link")}" class="social-link-arrow" data-edit-path="contact.socialLinks.${index}.url" data-edit-kind="url">
           <span class="social-icon-slot" data-edit-path="contact.socialLinks.${index}.icon" data-edit-kind="image" title="Replace icon">
             ${item.icon ? `<img src="${escapeHtml(item.icon)}" alt="" />` : `<span>${escapeHtml((item.label || "?").slice(0, 1))}</span>`}
@@ -708,8 +990,10 @@ const renderContent = () => {
   setEditGroup($(".contact-copy"), "contact-copy", "Edit contact copy");
   setEditGroup($(".footer-heading"), "footer-heading", "Edit footer heading");
   renderInlineControls();
+  assignLayoutKeys();
   applyElementLinks();
   setupAnimationState();
+  applyLayoutTransforms();
 };
 
 const renderInlineControls = () => {
@@ -771,6 +1055,7 @@ const positionInlineControls = () => {
     button.style.top = `${Math.max(8, Math.min(window.innerHeight - size - 8, top))}px`;
   });
   positionBlockPopover();
+  positionLayoutOverlay();
 };
 
 const scheduleInlineControlPosition = () => {
@@ -822,6 +1107,19 @@ const createEditorShell = () => {
       <button type="button" data-block-back>Go back</button>
       <button type="button" data-block-forward>Go forward</button>
     </div>
+    <div class="layout-grid-overlay" hidden></div>
+    <div class="layout-guide layout-guide-v" hidden></div>
+    <div class="layout-guide layout-guide-h" hidden></div>
+    <div class="layout-selection-overlay" hidden>
+      <button class="layout-move-handle" type="button" data-layout-move title="Move">+</button>
+      <button class="layout-rotate-handle" type="button" data-layout-rotate title="Rotate"></button>
+      <div class="layout-toolbar">
+        <button type="button" data-layout-reset title="Reset position">Reset</button>
+        <button type="button" data-layout-backward title="Send backward">Back</button>
+        <button type="button" data-layout-forward title="Bring forward">Front</button>
+        <button type="button" data-layout-lock title="Lock">Lock</button>
+      </div>
+    </div>
     <input class="image-picker" type="file" accept=".jpg,.jpeg,.png,.webp,.gif,.svg,image/jpeg,image/png,image/webp,image/gif,image/svg+xml" hidden />
     <div class="editor-toast" role="status" aria-live="polite"></div>
   `);
@@ -855,7 +1153,10 @@ const createEditorShell = () => {
     document.body.classList.toggle("is-editing", editMode);
     $(".editor-float").setAttribute("aria-pressed", String(editMode));
     $(".draft-bar").hidden = !editMode;
+    $(".layout-grid-overlay").hidden = !editMode;
+    if (!editMode) clearLayoutSelection();
     scheduleInlineControlPosition();
+    renderLayoutSelection();
   });
   $("[data-save-draft]").addEventListener("click", saveContent);
   $("[data-discard-draft]").addEventListener("click", discardDraft);
@@ -865,6 +1166,15 @@ const createEditorShell = () => {
   $("[data-block-forward]").addEventListener("click", redoActiveBlock);
   $("[data-global-undo]")?.addEventListener("click", undoGlobalChange);
   $("[data-global-redo]")?.addEventListener("click", redoGlobalChange);
+  $("[data-layout-move]")?.addEventListener("pointerdown", startLayoutMove);
+  $("[data-layout-rotate]")?.addEventListener("pointerdown", startLayoutRotate);
+  $("[data-layout-reset]")?.addEventListener("click", resetSelectedLayout);
+  $("[data-layout-forward]")?.addEventListener("click", () => changeSelectedLayer(1));
+  $("[data-layout-backward]")?.addEventListener("click", () => changeSelectedLayer(-1));
+  $("[data-layout-lock]")?.addEventListener("click", toggleSelectedLock);
+  document.addEventListener("pointermove", updateLayoutGesture);
+  document.addEventListener("pointerup", finishLayoutGesture);
+  document.addEventListener("pointercancel", finishLayoutGesture);
   $("[data-context-link]")?.addEventListener("click", applyContextLink);
   $("[data-context-replace-image]")?.addEventListener("click", replaceContextImage);
   $("[data-context-edit-description]")?.addEventListener("click", editContextDescription);
@@ -885,7 +1195,7 @@ const createEditorShell = () => {
 };
 
 const handleEditorClick = async (event) => {
-  if (event.target.closest(".global-editor-dock, .editor-context-menu, .block-history-popover, .image-picker")) return;
+  if (event.target.closest(".global-editor-dock, .editor-context-menu, .block-history-popover, .image-picker, .layout-selection-overlay")) return;
   const editButton = event.target.closest("[data-inline-edit-group]");
   const addButton = event.target.closest("[data-add-card]");
   const addSkillButton = event.target.closest("[data-add-skill-category]");
@@ -896,8 +1206,20 @@ const handleEditorClick = async (event) => {
   const editableImage = event.target.closest("[data-edit-kind='image']");
   const editableField = event.target.closest("[data-edit-path]");
   const inlineLink = event.target.closest("a.inline-text-link, a.element-link-wrap, a.link-with-arrow");
+  const layoutTarget = getLayoutClickTarget(event.target);
 
   if (!editMode && (editButton || addButton || addSkillButton || addSkillCategoryButton || addSocialButton || deleteSocialButton || deleteButton || editableImage)) return;
+
+  if (editMode && layoutTarget) {
+    selectLayoutTarget(layoutTarget, event.shiftKey);
+    if (event.shiftKey) {
+      event.preventDefault();
+      event.stopPropagation();
+      return;
+    }
+  } else if (editMode && !event.target.closest("button, a, input, textarea, [contenteditable='true']")) {
+    clearLayoutSelection();
+  }
 
   if (editMode && addSkillCategoryButton) {
     event.preventDefault();
@@ -1357,6 +1679,7 @@ const undoGlobalChange = () => {
   saveGlobalHistory();
   saveDraft();
   renderContent();
+  renderLayoutSelection();
   toast("Went back one edit");
 };
 
@@ -1373,6 +1696,7 @@ const redoGlobalChange = () => {
   saveGlobalHistory();
   saveDraft();
   renderContent();
+  renderLayoutSelection();
   toast("Went forward one edit");
 };
 
@@ -1597,6 +1921,7 @@ const discardDraft = () => {
   if (!window.confirm("Discard all local draft edits?")) return;
   activeGroup = null;
   activeEditable = null;
+  clearLayoutSelection();
   draftContent = structuredClone(savedContent);
   localStorage.removeItem(draftKey);
   globalHistory = { past: [], future: [] };
