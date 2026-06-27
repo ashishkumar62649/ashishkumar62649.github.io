@@ -1,0 +1,293 @@
+{
+  "meta": {
+    "siteTitle": "Ashish Kumar | Student Developer",
+    "description": "Ashish Kumar is a student developer working across AI, data, and systems."
+  },
+  "hero": {
+    "name": "Ashish",
+    "title": "STUDENT\nDEVELOPER",
+    "identity": "AI & Data Science Student",
+    "subtitle": "Building useful AI, data, automation, and systems work.",
+    "location": "Bangalore, India",
+    "year": "2018",
+    "internshipStatus": "Open to internships",
+    "image": "./assets/uploads/screenshot-2026-06-25-124855-1782550863416-915817.png",
+    "decorations": {
+      "star": "./assets/tool-star.png",
+      "lightning": "./assets/tool-lightning.png"
+    },
+    "buttons": [
+      {
+        "text": "View Projects",
+        "url": "#projects"
+      },
+      {
+        "text": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  "backgrounds": {
+    "light": "",
+    "dark": "./assets/dark-globe-wallpaper.jpg"
+  },
+  "about": {
+    "heading": "Hey!",
+    "intro": "I'm Ashish, an AI & Data Science student developer building with Python, data, machine learning, automation, and systems.",
+    "secondary": "I'm focused on building practical, useful systems that turn messy data and workflows into clear tools.",
+    "status": "I'm currently open to internships across AI, Data Science, Machine Learning, Analytics, Python Development, Software Development, and Research.",
+    "ctaText": "Get Started",
+    "ctaLink": "mailto:hello@example.com"
+  },
+  "approach": {
+    "text": "From data to decisions. Clean, practical AI systems built to understand patterns, simplify workflows, and turn thoughtful engineering into real-world clarity."
+  },
+  "sectionLabels": {
+    "projectsKicker": "/Selected work",
+    "projectsHeading": "PROJECTS",
+    "learningKicker": "/Learning log",
+    "learningHeading": "LEARNING",
+    "notesKicker": "/Research & notes",
+    "notesHeading": "             Notes",
+    "stackSymbol": "*",
+    "stackTitle": "MY STACK"
+  },
+  "navigation": [
+    {
+      "text": "About Me",
+      "url": "#about"
+    },
+    {
+      "text": "Skills",
+      "url": "#skills"
+    },
+    {
+      "text": "Projects",
+      "url": "#projects"
+    },
+    {
+      "text": "Learning",
+      "url": "#learning"
+    },
+    {
+      "text": "Notes",
+      "url": "#notes"
+    },
+    {
+      "text": "Contact",
+      "url": "#contact"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Data Workflow Assistant",
+      "category": "AI Automation",
+      "shortDescription": "A practical assistant for cleaning and summarizing messy datasets.",
+      "longDescription": "A focused prototype that combines Python data processing with a simple interface for turning raw files into clear summaries.",
+      "techStack": [
+        "Python",
+        "Pandas",
+        "Automation"
+      ],
+      "githubLink": "#",
+      "liveDemoLink": "#",
+      "image": "",
+      "whatILearned": "Designing tools around repeatable workflows matters as much as the model or script."
+    },
+    {
+      "title": {
+        "text": "Portfolio System",
+        "links": [
+          {
+            "text": "System",
+            "url": "https://github.com/ashishkumar62649"
+          }
+        ]
+      },
+      "category": "FRONTEND",
+      "shortDescription": "A dark-first editorial portfolio built as a fast static website.",
+      "longDescription": "A minimal static portfolio with animated sections, responsive layout, content-driven rendering, and local-only editing.",
+      "techStack": [
+        "HTMLCSSJavaScript"
+      ],
+      "githubLink": "#",
+      "liveDemoLink": "#",
+      "image": "",
+      "whatILearned": "Static sites can still have a polished editing workflow when the tooling stays local."
+    }
+  ],
+  "skills": [
+    {
+      "name": "JavaScript",
+      "category": "Frontend",
+      "description": "Interactive web interfaces.",
+      "icon": "https://cdn.simpleicons.org/javascript/F7DF1E"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Frontend",
+      "description": "Typed application logic.",
+      "icon": "https://cdn.simpleicons.org/typescript/3178C6"
+    },
+    {
+      "name": "React",
+      "category": "Frontend",
+      "description": "Component-based UI work.",
+      "icon": "https://cdn.simpleicons.org/react/61DAFB"
+    },
+    {
+      "name": "Next.js",
+      "category": "Frontend",
+      "description": "Production web apps.",
+      "icon": "https://cdn.simpleicons.org/nextdotjs/111111"
+    },
+    {
+      "name": "Python",
+      "category": "AI & Data",
+      "description": "Data, automation, and ML workflows.",
+      "icon": "https://cdn.simpleicons.org/python/3776AB"
+    },
+    {
+      "name": "Pandas",
+      "category": "AI & Data",
+      "description": "Analysis and transformation.",
+      "icon": "https://cdn.simpleicons.org/pandas/150458"
+    },
+    {
+      "name": "Node.js",
+      "category": "Backend",
+      "description": "Local tooling and APIs.",
+      "icon": "https://cdn.simpleicons.org/nodedotjs/5FA04E"
+    },
+    {
+      "name": "Express",
+      "category": "Backend",
+      "description": "Server-side JavaScript patterns.",
+      "icon": "https://cdn.simpleicons.org/express/111111"
+    },
+    {
+      "name": "MySQL",
+      "category": "Database",
+      "description": "Relational data modeling.",
+      "icon": "https://cdn.simpleicons.org/mysql/4479A1"
+    },
+    {
+      "name": "Git",
+      "category": "Tools",
+      "description": "Version control and collaboration.",
+      "icon": "https://cdn.simpleicons.org/git/F05032"
+    },
+    {
+      "name": "Docker",
+      "category": "Tools",
+      "description": "Reproducible environments.",
+      "icon": "https://cdn.simpleicons.org/docker/2496ED"
+    }
+  ],
+  "learning": [
+    {
+      "title": "Applied Machine Learning",
+      "type": "CURRENTLY LEARNING",
+      "provider": "Self-study",
+      "status": "IN PROGRESS",
+      "link": "Open",
+      "description": "Building a stronger foundation in model evaluation, feature work, and practical experimentation.",
+      "image": ""
+    },
+    {
+      "title": "New learning item",
+      "type": "currently learning",
+      "provider": "Provider",
+      "status": "In progress",
+      "link": "#",
+      "description": "Description",
+      "image": ""
+    }
+  ],
+  "notes": [
+    {
+      "title": "What makes a useful AI project?",
+      "category": "Research",
+      "summary": "A short note on keeping AI work grounded in real workflows.",
+      "content": "Useful AI projects start with a painful workflow, a clear input, and an output someone can trust. The model is only one part of the system.",
+      "tags": [
+        "AISystemsProduct"
+      ],
+      "date": "2026-06-27",
+      "readingTime": "3 min"
+    }
+  ],
+  "contact": {
+    "heading": "Let's talk.",
+    "text": "Have a project, internship opportunity, or research idea? Send a note and I'll get back to you soon.",
+    "email": "hello@example.com",
+    "github": "#",
+    "linkedin": "#",
+    "resume": "#",
+    "buttonText": "Submit",
+    "formLabels": {
+      "name": "Name",
+      "email": "Email",
+      "project": "Your Project"
+    },
+    "formPlaceholders": {
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "project": "Tell us about your project"
+    },
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "#",
+        "icon": "https://cdn.simpleicons.org/github/111111"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "#",
+        "icon": "https://cdn.simpleicons.org/linkedin/111111"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:hello@example.com",
+        "icon": ""
+      }
+    ]
+  },
+  "footer": {
+    "text": "Building<br>AI, Data<br>&amp; Systems.",
+    "copyrightText": "adadadadadadaaaa",
+    "quickLinksHeading": "/Quick links",
+    "contactHeading": "/Contact",
+    "quickLinks": [
+      {
+        "text": "Home",
+        "url": "#home"
+      },
+      {
+        "text": "About Me",
+        "url": "#about"
+      },
+      {
+        "text": "Projects",
+        "url": "#projects"
+      },
+      {
+        "text": "Skills",
+        "url": "#skills"
+      },
+      {
+        "text": "Learning",
+        "url": "#learning"
+      },
+      {
+        "text": "Notes",
+        "url": "#notes"
+      },
+      {
+        "text": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  "elementLinks": {}
+}

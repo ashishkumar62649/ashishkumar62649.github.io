@@ -1,0 +1,5 @@
+{
+  "scripts": {
+    "edit": "node editor/local-server.js"
+  }
+}

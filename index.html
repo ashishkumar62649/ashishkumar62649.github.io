@@ -1,379 +1,515 @@
 <!DOCTYPE html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Ashish Kumar — Data, AI & Systems</title>
-  <meta name="description" content="Personal portfolio of Ashish Kumar. Exploring intelligence through data, code, and systems.">
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css">
-  <link rel="stylesheet" href="css/style.css">
-</head>
-<body>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Ashish Kumar is a student developer working across AI, data, and systems."
+    />
+    <title>Ashish Kumar | Student Developer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="paper-grain" aria-hidden="true"></div>
+    <div class="scroll-progress" aria-hidden="true">
+      <span class="scroll-progress-fill"></span>
+    </div>
 
-  <div id="stars"></div>
+    <button class="theme-toggle" type="button" aria-label="Toggle dark mode" aria-pressed="false">
+      <span class="theme-toggle-dot"></span>
+    </button>
 
-  <!-- Navbar -->
-  <nav class="nav">
-    <div class="nav-pill">
-      <a href="index.html" class="nav-logo">Ashish Kumar</a>
-      <button class="hamburger" id="hamburger" aria-label="Menu" aria-expanded="false">
-        <span></span><span></span><span></span>
+    <header class="top-pill" data-reveal>
+      <a href="#home" aria-label="Ashish Kumar home" data-site-brand>Ashish</a>
+      <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
       </button>
-      <ul class="nav-links" id="nav-links">
-        <li><a href="index.html" class="roll-link active"><span class="roll-inner"><span class="roll-current">Home</span><span class="roll-hover">Home</span></span></a></li>
-        <li><a href="projects.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Projects</span><span class="roll-hover">Projects</span></span></a></li>
-        <li><a href="writing.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Writing</span><span class="roll-hover">Writing</span></span></a></li>
-        <li><a href="learning.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Learning</span><span class="roll-hover">Learning</span></span></a></li>
-        <li><a href="research-notes.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Research &amp; Notes</span><span class="roll-hover">Research &amp; Notes</span></span></a></li>
-        <li><a href="resume.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Resume</span><span class="roll-hover">Resume</span></span></a></li>
-        <li><a href="contact.html" class="roll-link"><span class="roll-inner"><span class="roll-current">Contact</span><span class="roll-hover">Contact</span></span></a></li>
-        <li><button class="nav-toggle" id="theme-toggle" aria-label="Toggle theme">&#9790;</button></li>
-      </ul>
-    </div>
-  </nav>
+      <nav class="menu-panel" aria-label="Main menu">
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#learning">Learning</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
-  <div class="page-content">
+    <main id="home">
+      <section class="reference-hero" aria-labelledby="hero-title">
+        <button class="floating-tool tool-star" type="button" aria-label="Move star tool">
+          <img src="./assets/tool-star.png" alt="" draggable="false" />
+        </button>
+        <button class="floating-tool tool-lightning" type="button" aria-label="Move lightning tool">
+          <img src="./assets/tool-lightning.png" alt="" draggable="false" />
+        </button>
 
-    <!-- ===== Hero (Sticky Pinned) ===== -->
-    <div class="hero-wrapper">
-      <div class="hero-pinned">
-        <div class="hero-motion">
-          <div class="hero-top-bar">
-            <span class="hero-eyebrow">Data Science / AI / Systems</span>
-            <span class="hero-year">/Building since 2024</span>
-          </div>
-          <h1 class="hero-heading">
-            <span class="line"><span>DATA SCIENCE</span></span>
-            <span class="line"><span>&amp; AI SYSTEMS</span></span>
+        <div class="hero-title-wrap">
+          <h1 id="hero-title" class="hero-title" aria-label="Student Developer" data-hero-title>
+            <span class="title-line">STUDENT</span>
+            <span class="title-line">DEVELOPER</span>
           </h1>
-          <div class="hero-card-wrap">
-            <div class="hero-card">
-              <img src="assets/profile.png" alt="Ashish Kumar">
+        </div>
+
+        <button class="flip-card" type="button" aria-label="Flip Ashish Kumar portrait">
+          <span class="flip-card-inner">
+            <span class="flip-face flip-front">
+              <img src="./assets/portrait.jpg" alt="Ashish Kumar portrait" data-hero-image />
+            </span>
+            <span class="flip-face flip-back">
+              <img src="./assets/portrait.jpg" alt="Ashish Kumar portrait" data-hero-image-back />
+            </span>
+          </span>
+        </button>
+
+        <div class="hero-footer">
+          <span class="copyright" data-hero-year>@2018</span>
+          <span class="location" data-hero-location>#Bangalore, India</span>
+        </div>
+      </section>
+
+      <section class="phase-two" id="about" aria-labelledby="phase-two-title">
+        <div class="phase-two-sticky">
+          <div class="phase-copy phase-copy-left">
+            <h2 id="phase-two-title" data-about-heading>Hey!</h2>
+            <p data-about-intro>
+              I&apos;m Ashish, an AI &amp; Data Science student developer building with
+              Python, data, machine learning, automation, and systems.
+            </p>
+          </div>
+
+          <div class="phase-photo-slot" aria-hidden="true"></div>
+
+          <div class="phase-copy phase-copy-right">
+            <p data-about-secondary>
+              I&apos;m focused on building practical, useful systems that turn messy data
+              and workflows into clear tools.
+            </p>
+            <p data-about-status>
+              I&apos;m currently open to internships across AI, Data Science, Machine
+              Learning, Analytics, Python Development, Software Development, and Research.
+            </p>
+            <a href="mailto:hello@example.com" data-about-cta>Get Started <span aria-hidden="true">&nearr;</span></a>
+          </div>
+        </div>
+      </section>
+
+      <section class="phase-three" id="approach" aria-labelledby="phase-three-title">
+        <div class="phase-three-sticky">
+          <p
+            id="phase-three-title"
+            class="phase-three-text"
+            data-fill-text="From data to decisions. Clean, practical AI systems built to understand patterns, simplify workflows, and turn thoughtful engineering into real-world clarity."
+          >
+            From data to decisions. Clean, practical AI systems built to understand patterns,
+            simplify workflows, and turn thoughtful engineering into real-world clarity.
+          </p>
+        </div>
+      </section>
+
+      <section class="stack-section" id="skills" aria-labelledby="stack-title">
+        <div class="stack-inner">
+          <div class="stack-kicker">
+            <span aria-hidden="true">*</span>
+            <p id="stack-title">MY STACK</p>
+          </div>
+
+          <div class="stack-grid" data-skills-list></div>
+        </div>
+      </section>
+
+      <section class="projects-section editorial-section" id="projects" aria-labelledby="projects-title">
+        <div class="editorial-inner">
+          <div class="section-heading">
+            <p data-projects-kicker>/Selected work</p>
+            <h2 id="projects-title" data-projects-heading>Projects</h2>
+          </div>
+          <div class="project-grid" data-projects-list></div>
+        </div>
+      </section>
+
+      <section class="learning-section editorial-section" id="learning" aria-labelledby="learning-title">
+        <div class="editorial-inner">
+          <div class="section-heading">
+            <p data-learning-kicker>/Learning log</p>
+            <h2 id="learning-title" data-learning-heading>Learning</h2>
+          </div>
+          <div class="learning-list" data-learning-list></div>
+        </div>
+      </section>
+
+      <section class="notes-section editorial-section" id="notes" aria-labelledby="notes-title">
+        <div class="editorial-inner">
+          <div class="section-heading">
+            <p data-notes-kicker>/Research &amp; notes</p>
+            <h2 id="notes-title" data-notes-heading>Notes</h2>
+          </div>
+          <div class="notes-list" data-notes-list></div>
+        </div>
+      </section>
+
+      <section class="contact-section" id="contact" aria-labelledby="contact-title">
+        <div class="contact-inner">
+          <div class="contact-copy">
+            <div>
+              <h2 id="contact-title" data-contact-heading>Let&rsquo;s talk.</h2>
+              <p data-contact-text>Have a project or need help? Fill out the form, and we&apos;ll get back to you soon.</p>
             </div>
-          </div>
-          <div class="hero-deco hero-deco-star"></div>
-          <div class="hero-deco hero-deco-orbit"></div>
-          <div class="hero-deco hero-deco-dot"></div>
-          <div class="hero-deco hero-deco-line"></div>
-        </div>
-      </div>
-    </div>
 
-    <!-- ===== About ===== -->
-    <section class="about-section">
-      <div class="container">
-        <div class="about-grid">
-          <div class="reveal">
-            <p class="about-eyebrow">About</p>
-            <h2 class="about-heading">Hey!</h2>
-            <p class="about-text">I'm Ashish, a Data Science and AI student based in Bangalore, building my path through Python, SQL, machine learning, AI tools, writing, and consistent projects.</p>
-            <p class="about-text">I'm interested in how intelligence, data, and software systems come together to solve real problems.</p>
-            <div style="margin-top: 1.5rem;">
-              <a href="projects.html" class="btn btn-ghost">View Projects</a>
+            <nav class="social-links" aria-label="Social links" data-social-links>
+            </nav>
+          </div>
+
+          <form class="contact-form">
+            <label>
+              <span>Name</span>
+              <input type="text" name="name" placeholder="Enter your name" autocomplete="name" />
+            </label>
+            <label>
+              <span>Email</span>
+              <input type="email" name="email" placeholder="Enter your email" autocomplete="email" />
+            </label>
+            <label>
+              <span>Your Project</span>
+              <textarea name="project" placeholder="Tell us about your project"></textarea>
+            </label>
+            <button type="submit" data-contact-button>Submit</button>
+          </form>
+        </div>
+      </section>
+
+      <footer class="site-footer" aria-labelledby="footer-title">
+        <div class="footer-inner">
+          <div class="footer-heading">
+            <h2 id="footer-title">Building<br />AI, Data<br />&amp; Systems.</h2>
+          </div>
+
+          <nav class="footer-links" aria-label="Footer navigation">
+            <h3>/Quick links</h3>
+            <div class="footer-link-list">
+              <a href="#home">Home</a>
+              <a href="#about">About Me</a>
+              <a href="#skills">Skills</a>
+              <a href="#projects">Projects</a>
+              <a href="#learning">Learning</a>
+              <a href="#notes">Notes</a>
+              <a href="#contact">Contact</a>
             </div>
-          </div>
-          <div class="about-card reveal reveal-delay-2">
-            <img src="assets/profile.png" alt="Ashish Kumar">
-          </div>
-        </div>
-      </div>
-    </section>
+          </nav>
 
-    <!-- Marquee -->
-    <div class="marquee-wrap">
-      <div class="marquee-track">
-        <span class="marquee-item">DATA</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">AI</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">SYSTEMS</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">PYTHON</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">SQL</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">MACHINE LEARNING</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">WRITING</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">PROJECTS</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">DATA</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">AI</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">SYSTEMS</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">PYTHON</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">SQL</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">MACHINE LEARNING</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">WRITING</span><span class="marquee-dot">&bull;</span>
-        <span class="marquee-item">PROJECTS</span><span class="marquee-dot">&bull;</span>
-      </div>
-    </div>
+          <div class="footer-contact">
+            <h3>/Contact</h3>
+            <a href="mailto:hello@example.com" data-footer-email>hello@example.com</a>
+          </div>
 
-    <!-- Now -->
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-eyebrow">Now</p>
-          <h2 class="section-title">What I'm doing right now</h2>
+          <p class="footer-name" aria-hidden="true" data-footer-name>ASHISH</p>
         </div>
-        <div class="now-grid">
-          <div class="reveal reveal-delay-1">
-            <ul class="now-list">
-              <li>Building internship-ready data and AI projects</li>
-              <li>Learning Python, SQL, machine learning, and GenAI tools</li>
-              <li>Creating a public portfolio through GitHub and writing</li>
-              <li>Exploring how intelligence, data, and software systems connect</li>
-            </ul>
-          </div>
-          <div class="reveal reveal-delay-2">
-            <div class="stats-row" style="grid-template-columns: 1fr 1fr;">
-              <div class="stat-cell">
-                <div class="stat-number">2</div>
-                <div class="stat-label">Published projects</div>
-              </div>
-              <div class="stat-cell">
-                <div class="stat-number">BLR</div>
-                <div class="stat-label">Based in Bangalore</div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
+      </footer>
+    </main>
 
-    <div class="container"><hr class="sep"></div>
-
-    <!-- Featured Projects -->
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-eyebrow">Projects</p>
-          <h2 class="section-title">Featured projects</h2>
-          <p class="section-desc">Real things I've built. Each one teaches me something new.</p>
-        </div>
-        <div class="projects-grid">
-          <div class="project-card reveal reveal-delay-1">
-            <div class="project-card-head">
-              <h3 class="project-card-title">Building Energy Anomaly Detection</h3>
-              <span class="project-status status-published">Published</span>
-            </div>
-            <p class="project-card-desc">Unsupervised ML project for detecting abnormal building energy consumption patterns.</p>
-            <div class="project-card-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">Pandas</span>
-              <span class="tech-tag">Scikit-learn</span>
-              <span class="tech-tag">Time Series</span>
-            </div>
-            <a href="https://github.com/ashishkumar62649/building-energy-anomaly-detection" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
-          </div>
-          <div class="project-card reveal reveal-delay-2">
-            <div class="project-card-head">
-              <h3 class="project-card-title">God Eyes</h3>
-              <span class="project-status status-published">Published</span>
-            </div>
-            <p class="project-card-desc">Experimental AI/data system for learning project structure, services, and system design.</p>
-            <div class="project-card-tech">
-              <span class="tech-tag">Python</span>
-              <span class="tech-tag">TypeScript</span>
-              <span class="tech-tag">Docker</span>
-              <span class="tech-tag">Systems</span>
-            </div>
-            <a href="https://github.com/ashishkumar62649/god-eyes" target="_blank" rel="noopener" class="project-card-link">View on GitHub <span class="arrow">&#8599;</span></a>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container"><hr class="sep"></div>
-
-    <!-- Tools & Stack (Categorized) -->
-    <section class="tools-section">
-      <div class="container">
-        <div class="tools-header reveal">
-          <p class="section-eyebrow">Stack</p>
-          <h2 class="section-title">Tools &amp; Stack</h2>
-        </div>
-
-        <div class="tools-category reveal">
-          <p class="tools-category-label">Languages</p>
-          <div class="tools-items">
-            <div class="tool-item"><i class="devicon-python-plain"></i><span>Python</span></div>
-            <div class="tool-item"><i class="devicon-c-plain"></i><span>C</span></div>
-            <div class="tool-item"><i class="devicon-mysql-plain"></i><span>SQL</span></div>
-          </div>
-        </div>
-
-        <div class="tools-category reveal">
-          <p class="tools-category-label">Data &amp; ML</p>
-          <div class="tools-items">
-            <div class="tool-item"><i class="devicon-pandas-original"></i><span>Pandas</span></div>
-            <div class="tool-item"><i class="devicon-numpy-original"></i><span>NumPy</span></div>
-            <div class="tool-item"><i class="devicon-matplotlib-plain"></i><span>Matplotlib</span></div>
-            <div class="tool-item"><i class="devicon-scikit-learn-plain"></i><span>Scikit-learn</span></div>
-            <div class="tool-item"><i class="devicon-jupyter-plain"></i><span>Jupyter</span></div>
-          </div>
-        </div>
-
-        <div class="tools-category reveal">
-          <p class="tools-category-label">AI Tools</p>
-          <div class="tools-items">
-            <div class="tool-item"><i class="devicon-openai-plain"></i><span>LLM Tools</span></div>
-            <div class="tool-item"><span style="font-size: 1.1rem; color: var(--text-secondary);">&#9998;</span><span>Prompt Engineering</span></div>
-            <div class="tool-item"><span style="font-size: 1.1rem; color: var(--text-secondary);">&#8644;</span><span>RAG Basics</span></div>
-            <div class="tool-item"><i class="devicon-bash-plain"></i><span>AI-assisted CLI</span></div>
-          </div>
-        </div>
-
-        <div class="tools-category reveal">
-          <p class="tools-category-label">Web / App</p>
-          <div class="tools-items">
-            <div class="tool-item"><i class="devicon-html5-plain"></i><span>HTML</span></div>
-            <div class="tool-item"><i class="devicon-css3-plain"></i><span>CSS</span></div>
-            <div class="tool-item"><i class="devicon-javascript-plain"></i><span>JavaScript</span></div>
-            <div class="tool-item"><i class="devicon-streamlit-plain"></i><span>Streamlit</span></div>
-          </div>
-        </div>
-
-        <div class="tools-category reveal">
-          <p class="tools-category-label">Tools</p>
-          <div class="tools-items">
-            <div class="tool-item"><i class="devicon-git-plain"></i><span>Git</span></div>
-            <div class="tool-item"><i class="devicon-github-plain"></i><span>GitHub</span></div>
-            <div class="tool-item"><i class="devicon-vscode-plain"></i><span>VS Code</span></div>
-            <div class="tool-item"><i class="devicon-bash-plain"></i><span>CLI</span></div>
-            <div class="tool-item"><i class="devicon-docker-plain"></i><span>Docker</span></div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container"><hr class="sep"></div>
-
-    <!-- Writing Preview -->
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-eyebrow">Writing</p>
-          <h2 class="section-title">Thoughts &amp; notes</h2>
-          <p class="section-desc">Technical writing, project reflections, and honest write-ups about what I'm learning.</p>
-        </div>
-        <div class="writing-grid">
-          <div class="writing-card reveal reveal-delay-1">
-            <p class="writing-card-tag">Project Reflection</p>
-            <h3 class="writing-card-title">What I learned while building my first ML anomaly detection project</h3>
-            <p class="writing-card-date">Coming soon</p>
-          </div>
-          <div class="writing-card reveal reveal-delay-2">
-            <p class="writing-card-tag">Technical</p>
-            <h3 class="writing-card-title">Why SQL matters for data science internships</h3>
-            <p class="writing-card-date">Coming soon</p>
-          </div>
-          <div class="writing-card reveal reveal-delay-3">
-            <p class="writing-card-tag">Career</p>
-            <h3 class="writing-card-title">My roadmap for learning AI and data science</h3>
-            <p class="writing-card-date">Coming soon</p>
-          </div>
-          <div class="writing-card reveal reveal-delay-4">
-            <p class="writing-card-tag">Personal</p>
-            <h3 class="writing-card-title">How I am rebuilding my tech career through projects</h3>
-            <p class="writing-card-date">Coming soon</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <div class="container"><hr class="sep"></div>
-
-    <!-- Roadmap -->
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <p class="section-eyebrow">Roadmap</p>
-          <h2 class="section-title">Where things stand</h2>
-        </div>
-        <div class="roadmap reveal reveal-delay-1">
-          <div class="roadmap-group">
-            <h3 class="roadmap-group-title"><span class="roadmap-dot dot-green"></span> Published</h3>
-            <div class="roadmap-items">
-              <span class="roadmap-chip">Building Energy Anomaly Detection</span>
-              <span class="roadmap-chip">God Eyes</span>
-            </div>
-          </div>
-          <div class="roadmap-group">
-            <h3 class="roadmap-group-title"><span class="roadmap-dot dot-yellow"></span> Building</h3>
-            <div class="roadmap-items">
-              <span class="roadmap-chip">SQL E-commerce Analysis</span>
-              <span class="roadmap-chip">CSV Chatbot</span>
-              <span class="roadmap-chip">AI Resume Reviewer</span>
-            </div>
-          </div>
-          <div class="roadmap-group">
-            <h3 class="roadmap-group-title"><span class="roadmap-dot dot-gray"></span> Planned</h3>
-            <div class="roadmap-items">
-              <span class="roadmap-chip">Resume</span>
-              <span class="roadmap-chip">Blog posts</span>
-              <span class="roadmap-chip">Research notes</span>
-              <span class="roadmap-chip">Case studies</span>
-              <span class="roadmap-chip">Newsletter</span>
-              <span class="roadmap-chip">Bookshelf</span>
-              <span class="roadmap-chip">Certifications</span>
-              <span class="roadmap-chip">Open-source</span>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Contact CTA -->
-    <section class="contact-cta">
-      <div class="container reveal">
-        <p class="section-eyebrow">Contact</p>
-        <h2 class="section-title">Let's connect</h2>
-        <p class="section-desc">Open to data analysis, Python development, AI/ML, and data science internships.</p>
-        <div class="contact-cta-actions">
-          <a href="mailto:your-email@example.com" class="btn btn-primary">Email me</a>
-          <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener" class="btn btn-ghost">GitHub</a>
-          <a href="contact.html" class="btn btn-ghost">More contact info</a>
-        </div>
-      </div>
-    </section>
-  </div>
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-inner">
-        <div class="footer-text">
-          <h3>Ashish Kumar</h3>
-          <p>Exploring intelligence through data, code, and systems.</p>
-        </div>
-        <div class="footer-links">
-          <div class="footer-col">
-            <h4>Pages</h4>
-            <a href="index.html">Home</a>
-            <a href="projects.html">Projects</a>
-            <a href="writing.html">Writing</a>
-            <a href="learning.html">Learning</a>
-          </div>
-          <div class="footer-col">
-            <h4>More</h4>
-            <a href="research-notes.html">Research &amp; Notes</a>
-            <a href="resume.html">Resume</a>
-            <a href="contact.html">Contact</a>
-          </div>
-          <div class="footer-col">
-            <h4>Connect</h4>
-            <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
-            <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
-            <a href="mailto:your-email@example.com">Email</a>
-          </div>
-        </div>
-      </div>
-      <div class="footer-bottom">
-        <p>&copy; 2026 Ashish Kumar</p>
-        <div class="footer-bottom-links">
-          <a href="https://github.com/ashishkumar62649" target="_blank" rel="noopener">GitHub</a>
-          <a href="https://linkedin.com/in/your-linkedin" target="_blank" rel="noopener">LinkedIn</a>
-        </div>
-      </div>
-    </div>
-  </footer>
-
-  <script src="js/script.js"></script>
-</body>
+    <script type="application/json" id="site-content-snapshot">
+{
+  "meta": {
+    "siteTitle": "Ashish Kumar | Student Developer",
+    "description": "Ashish Kumar is a student developer working across AI, data, and systems."
+  },
+  "hero": {
+    "name": "Ashish",
+    "title": "STUDENT\nDEVELOPER",
+    "identity": "AI & Data Science Student",
+    "subtitle": "Building useful AI, data, automation, and systems work.",
+    "location": "Bangalore, India",
+    "year": "2018",
+    "internshipStatus": "Open to internships",
+    "image": "./assets/uploads/screenshot-2026-06-25-124855-1782550863416-915817.png",
+    "decorations": {
+      "star": "./assets/tool-star.png",
+      "lightning": "./assets/tool-lightning.png"
+    },
+    "buttons": [
+      {
+        "text": "View Projects",
+        "url": "#projects"
+      },
+      {
+        "text": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  "backgrounds": {
+    "light": "",
+    "dark": "./assets/dark-globe-wallpaper.jpg"
+  },
+  "about": {
+    "heading": "Hey!",
+    "intro": "I'm Ashish, an AI & Data Science student developer building with Python, data, machine learning, automation, and systems.",
+    "secondary": "I'm focused on building practical, useful systems that turn messy data and workflows into clear tools.",
+    "status": "I'm currently open to internships across AI, Data Science, Machine Learning, Analytics, Python Development, Software Development, and Research.",
+    "ctaText": "Get Started",
+    "ctaLink": "mailto:hello@example.com"
+  },
+  "approach": {
+    "text": "From data to decisions. Clean, practical AI systems built to understand patterns, simplify workflows, and turn thoughtful engineering into real-world clarity."
+  },
+  "sectionLabels": {
+    "projectsKicker": "/Selected work",
+    "projectsHeading": "PROJECTS",
+    "learningKicker": "/Learning log",
+    "learningHeading": "LEARNING",
+    "notesKicker": "/Research & notes",
+    "notesHeading": "             Notes",
+    "stackSymbol": "*",
+    "stackTitle": "MY STACK"
+  },
+  "navigation": [
+    {
+      "text": "About Me",
+      "url": "#about"
+    },
+    {
+      "text": "Skills",
+      "url": "#skills"
+    },
+    {
+      "text": "Projects",
+      "url": "#projects"
+    },
+    {
+      "text": "Learning",
+      "url": "#learning"
+    },
+    {
+      "text": "Notes",
+      "url": "#notes"
+    },
+    {
+      "text": "Contact",
+      "url": "#contact"
+    }
+  ],
+  "projects": [
+    {
+      "title": "Data Workflow Assistant",
+      "category": "AI Automation",
+      "shortDescription": "A practical assistant for cleaning and summarizing messy datasets.",
+      "longDescription": "A focused prototype that combines Python data processing with a simple interface for turning raw files into clear summaries.",
+      "techStack": [
+        "Python",
+        "Pandas",
+        "Automation"
+      ],
+      "githubLink": "#",
+      "liveDemoLink": "#",
+      "image": "",
+      "whatILearned": "Designing tools around repeatable workflows matters as much as the model or script."
+    },
+    {
+      "title": {
+        "text": "Portfolio System",
+        "links": [
+          {
+            "text": "System",
+            "url": "https://github.com/ashishkumar62649"
+          }
+        ]
+      },
+      "category": "FRONTEND",
+      "shortDescription": "A dark-first editorial portfolio built as a fast static website.",
+      "longDescription": "A minimal static portfolio with animated sections, responsive layout, content-driven rendering, and local-only editing.",
+      "techStack": [
+        "HTMLCSSJavaScript"
+      ],
+      "githubLink": "#",
+      "liveDemoLink": "#",
+      "image": "",
+      "whatILearned": "Static sites can still have a polished editing workflow when the tooling stays local."
+    }
+  ],
+  "skills": [
+    {
+      "name": "JavaScript",
+      "category": "Frontend",
+      "description": "Interactive web interfaces.",
+      "icon": "https://cdn.simpleicons.org/javascript/F7DF1E"
+    },
+    {
+      "name": "TypeScript",
+      "category": "Frontend",
+      "description": "Typed application logic.",
+      "icon": "https://cdn.simpleicons.org/typescript/3178C6"
+    },
+    {
+      "name": "React",
+      "category": "Frontend",
+      "description": "Component-based UI work.",
+      "icon": "https://cdn.simpleicons.org/react/61DAFB"
+    },
+    {
+      "name": "Next.js",
+      "category": "Frontend",
+      "description": "Production web apps.",
+      "icon": "https://cdn.simpleicons.org/nextdotjs/111111"
+    },
+    {
+      "name": "Python",
+      "category": "AI & Data",
+      "description": "Data, automation, and ML workflows.",
+      "icon": "https://cdn.simpleicons.org/python/3776AB"
+    },
+    {
+      "name": "Pandas",
+      "category": "AI & Data",
+      "description": "Analysis and transformation.",
+      "icon": "https://cdn.simpleicons.org/pandas/150458"
+    },
+    {
+      "name": "Node.js",
+      "category": "Backend",
+      "description": "Local tooling and APIs.",
+      "icon": "https://cdn.simpleicons.org/nodedotjs/5FA04E"
+    },
+    {
+      "name": "Express",
+      "category": "Backend",
+      "description": "Server-side JavaScript patterns.",
+      "icon": "https://cdn.simpleicons.org/express/111111"
+    },
+    {
+      "name": "MySQL",
+      "category": "Database",
+      "description": "Relational data modeling.",
+      "icon": "https://cdn.simpleicons.org/mysql/4479A1"
+    },
+    {
+      "name": "Git",
+      "category": "Tools",
+      "description": "Version control and collaboration.",
+      "icon": "https://cdn.simpleicons.org/git/F05032"
+    },
+    {
+      "name": "Docker",
+      "category": "Tools",
+      "description": "Reproducible environments.",
+      "icon": "https://cdn.simpleicons.org/docker/2496ED"
+    }
+  ],
+  "learning": [
+    {
+      "title": "Applied Machine Learning",
+      "type": "CURRENTLY LEARNING",
+      "provider": "Self-study",
+      "status": "IN PROGRESS",
+      "link": "Open",
+      "description": "Building a stronger foundation in model evaluation, feature work, and practical experimentation.",
+      "image": ""
+    },
+    {
+      "title": "New learning item",
+      "type": "currently learning",
+      "provider": "Provider",
+      "status": "In progress",
+      "link": "#",
+      "description": "Description",
+      "image": ""
+    }
+  ],
+  "notes": [
+    {
+      "title": "What makes a useful AI project?",
+      "category": "Research",
+      "summary": "A short note on keeping AI work grounded in real workflows.",
+      "content": "Useful AI projects start with a painful workflow, a clear input, and an output someone can trust. The model is only one part of the system.",
+      "tags": [
+        "AISystemsProduct"
+      ],
+      "date": "2026-06-27",
+      "readingTime": "3 min"
+    }
+  ],
+  "contact": {
+    "heading": "Let's talk.",
+    "text": "Have a project, internship opportunity, or research idea? Send a note and I'll get back to you soon.",
+    "email": "hello@example.com",
+    "github": "#",
+    "linkedin": "#",
+    "resume": "#",
+    "buttonText": "Submit",
+    "formLabels": {
+      "name": "Name",
+      "email": "Email",
+      "project": "Your Project"
+    },
+    "formPlaceholders": {
+      "name": "Enter your name",
+      "email": "Enter your email",
+      "project": "Tell us about your project"
+    },
+    "socialLinks": [
+      {
+        "label": "GitHub",
+        "url": "#",
+        "icon": "https://cdn.simpleicons.org/github/111111"
+      },
+      {
+        "label": "LinkedIn",
+        "url": "#",
+        "icon": "https://cdn.simpleicons.org/linkedin/111111"
+      },
+      {
+        "label": "Email",
+        "url": "mailto:hello@example.com",
+        "icon": ""
+      }
+    ]
+  },
+  "footer": {
+    "text": "Building<br>AI, Data<br>&amp; Systems.",
+    "copyrightText": "adadadadadadaaaa",
+    "quickLinksHeading": "/Quick links",
+    "contactHeading": "/Contact",
+    "quickLinks": [
+      {
+        "text": "Home",
+        "url": "#home"
+      },
+      {
+        "text": "About Me",
+        "url": "#about"
+      },
+      {
+        "text": "Projects",
+        "url": "#projects"
+      },
+      {
+        "text": "Skills",
+        "url": "#skills"
+      },
+      {
+        "text": "Learning",
+        "url": "#learning"
+      },
+      {
+        "text": "Notes",
+        "url": "#notes"
+      },
+      {
+        "text": "Contact",
+        "url": "#contact"
+      }
+    ]
+  },
+  "elementLinks": {}
+}
+    </script>
+    <script src="./script.js"></script>
+  </body>
 </html>
