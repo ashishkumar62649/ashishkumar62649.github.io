@@ -16,7 +16,7 @@ https://ashishkumar62649.github.io
 - Image replacement for profile, background, project, and skill images
 - Link editing and link removal
 - Global undo/redo while editing
-- Draft saving before final publish
+- Local autosave while editing
 - Content stored in `content/site.json`
 - Static deployment through GitHub Pages
 
@@ -62,11 +62,36 @@ Main files:
 ```text
 index.html
 styles.css
-script.js
+js/
+content/site.json
 editor/local-server.js
 ```
 
 You can edit the site visually using edit mode, or update the JSON/CSS/HTML directly.
+
+## Project Structure
+
+```text
+index.html                  Static page shell and embedded content snapshot
+styles.css                  Website and editor styling
+js/content-store.js         Defaults, content loading, autosave state, shared helpers
+js/editor-layout.js         Layout selection, movement, locking, element links
+js/content-renderer.js      Renders the portfolio from JSON
+js/editor-engine.js         Local edit mode, inline editing, uploads, history
+js/animations.js            Public interactions and scroll animations
+js/main.js                  App boot sequence
+content/site.json           Editable content source
+editor/local-server.js      Local-only editor server
+docs/                       Architecture and editor documentation
+```
+
+For a deeper explanation, see:
+
+```text
+docs/ARCHITECTURE.md
+docs/EDITOR_ENGINE.md
+docs/CONTENT_SCHEMA.md
+```
 
 ## Publishing
 
@@ -96,4 +121,3 @@ A small footer credit, README credit, or repository attribution is enough.
 ## Notes
 
 This project is intentionally simple. It does not require a database, login system, dashboard, or paid CMS. The editing workflow is local-first, and the public website remains static.
-

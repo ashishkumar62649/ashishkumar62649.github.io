@@ -9,6 +9,14 @@ const contentPath = path.join(root, "content", "site.json");
 const indexPath = path.join(root, "index.html");
 const uploadsDir = path.join(root, "assets", "uploads");
 const backupsDir = path.join(root, "backups");
+const clientScripts = [
+  "./js/content-store.js",
+  "./js/editor-layout.js",
+  "./js/content-renderer.js",
+  "./js/editor-engine.js",
+  "./js/animations.js",
+  "./js/main.js"
+];
 const port = Number(process.env.PORT || 3000);
 const host = "127.0.0.1";
 const maxUploadSize = 5 * 1024 * 1024;
@@ -144,10 +152,11 @@ const handleSaveContent = async (req, res) => {
 const updateIndexSnapshot = async (formattedJson) => {
   const indexHtml = await fs.readFile(indexPath, "utf8");
   const snapshot = `<script type="application/json" id="site-content-snapshot">\n${formattedJson.trim()}\n    </script>`;
+  const scriptTags = clientScripts.map((src) => `    <script src="${src}"></script>`).join("\n");
   const pattern = /<script\s+type="application\/json"\s+id="site-content-snapshot">[\s\S]*?<\/script>/;
   const nextHtml = pattern.test(indexHtml)
     ? indexHtml.replace(pattern, snapshot)
-    : indexHtml.replace(/\s*<script src="\.\/script\.js"><\/script>/, `\n    ${snapshot}\n    <script src="./script.js"></script>`);
+    : indexHtml.replace(/\s*<script src="\.\/(?:script|js\/main)\.js"><\/script>/, `\n    ${snapshot}\n${scriptTags}`);
   await fs.writeFile(indexPath, nextHtml, "utf8");
 };
 
