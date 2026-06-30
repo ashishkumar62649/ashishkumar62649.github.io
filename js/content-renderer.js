@@ -181,10 +181,7 @@ const renderClassicNotes = () => {
 
 const renderClassicContent = () => {
   setText("[data-classic-name]", siteContent.hero.name || "Ashish Kumar");
-  setHtml("[data-classic-identity]", siteContent.hero.identity);
-  setHtml("[data-classic-title]", richText(siteContent.hero.title || "Student Developer").replace(/\n+/g, " "));
-  setHtml("[data-classic-subtitle]", siteContent.hero.subtitle || siteContent.approach.text);
-  setText("[data-classic-location]", siteContent.hero.location);
+  setText("[data-classic-hero-name]", "Ashish Kumar");
   setHtml("[data-classic-about-heading]", siteContent.about.heading);
   setHtml("[data-classic-about-intro]", siteContent.about.intro);
   setHtml("[data-classic-about-secondary]", siteContent.about.secondary);
@@ -194,13 +191,6 @@ const renderClassicContent = () => {
   setHtml("[data-classic-notes-heading]", siteContent.sectionLabels.notesHeading);
   setHtml("[data-classic-contact-heading]", siteContent.contact.heading);
   setHtml("[data-classic-contact-text]", siteContent.contact.text);
-
-  const actions = $("[data-classic-actions]");
-  if (actions) {
-    actions.innerHTML = normalizeArray(siteContent.hero.buttons).map((button) =>
-      `<a href="${escapeHtml(classicSectionUrl(button.url || "#"))}">${renderLinkedText(button.text)}</a>`
-    ).join("");
-  }
 
   const email = $("[data-classic-email]");
   if (email) {

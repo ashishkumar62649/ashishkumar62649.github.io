@@ -11,12 +11,12 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600;700;800&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
   </head>
-  <body>
+  <body data-site-view="landing">
     <div class="paper-grain" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true">
       <span class="scroll-progress-fill"></span>
@@ -30,6 +30,104 @@
       <button class="is-active" type="button" data-view-button="classic" aria-pressed="true">Classic</button>
       <button type="button" data-view-button="modern" aria-pressed="false">Modern</button>
     </div>
+
+    <main class="choice-landing" id="landing">
+      <div class="classic-sky-background" aria-hidden="true">
+        <!-- SVG filter to convert black background to transparent for generated PNG assets -->
+        <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+          <filter id="remove-black">
+            <feColorMatrix type="matrix" values="
+              1 0 0 0 0
+              0 1 0 0 0
+              0 0 1 0 0
+              0.33 0.33 0.33 0 0
+            " />
+          </filter>
+        </svg>
+
+        <div class="sky-layer sky-day"></div>
+        <div class="sky-layer sky-night"></div>
+        <div class="sky-layer milky-way"></div>
+        
+        <div class="sun"></div>
+        
+        <div class="celestial-track">
+          <div class="moon"></div>
+        </div>
+        
+        <div class="cloud-layer">
+          <div class="cloud cloud-1"></div>
+          <div class="cloud cloud-2"></div>
+          <div class="cloud cloud-3"></div>
+          <div class="cloud cloud-4"></div>
+          <div class="cloud cloud-5"></div>
+          <div class="cloud cloud-6"></div>
+          <div class="cloud cloud-7"></div>
+          <div class="cloud cloud-8"></div>
+          <div class="cloud cloud-9"></div>
+          <div class="cloud cloud-10"></div>
+          <div class="cloud cloud-11"></div>
+          <div class="cloud cloud-12"></div>
+          <div class="cloud cloud-13"></div>
+          <div class="cloud cloud-14"></div>
+          <div class="cloud cloud-15"></div>
+          <div class="cloud cloud-16"></div>
+          <div class="cloud cloud-17"></div>
+          <div class="cloud cloud-18"></div>
+          <div class="cloud cloud-19"></div>
+          <div class="cloud cloud-20"></div>
+          <div class="cloud cloud-21"></div>
+          <div class="cloud cloud-22"></div>
+          <div class="cloud cloud-23"></div>
+          <div class="cloud cloud-24"></div>
+          <div class="cloud cloud-25"></div>
+        </div>
+      </div>
+
+      <section class="choice-intro" aria-labelledby="landing-title">
+        <div class="choice-intro-layer choice-intro-classic" aria-hidden="true">
+          <p>Hey!</p>
+          <h1>I&apos;m Ashish Kumar</h1>
+          <h2>AI Design Engineer</h2>
+          <p>Crafting intelligent systems where<br>interface, experience, and engineering<br>come together.</p>
+        </div>
+        <div class="choice-intro-layer choice-intro-modern" aria-hidden="true">
+          <p>Hey!</p>
+          <h1>I&apos;m Ashish Kumar</h1>
+          <h2>AI Design Engineer</h2>
+          <p>Crafting intelligent systems where<br>interface, experience, and engineering<br>come together.</p>
+        </div>
+        <div class="choice-intro-accessible">
+          <p>Hey!</p>
+          <h1>I&apos;m Ashish Kumar</h1>
+          <h2>AI Design Engineer</h2>
+          <p>Crafting intelligent systems where interface, experience, and engineering come together.</p>
+        </div>
+      </section>
+
+      <section class="choice-panel" aria-label="Choose portfolio design">
+        <button type="button" data-view-button="classic">
+          <span data-choice-label="classic">Studio</span>
+        </button>
+        <button type="button" data-view-button="modern">
+          <span data-choice-label="modern">Lab</span>
+        </button>
+      </section>
+
+      <section class="quote-space" aria-label="Quote space"></section>
+
+      <section class="landing-download" id="download" aria-labelledby="download-title">
+        <div class="download-copy download-copy-design">
+          <p>Download</p>
+          <h2 id="download-title">Keep the profile close.</h2>
+        </div>
+        <div class="download-copy download-copy-coding">
+          <p>download.profile()</p>
+          <h2>Resume / Portfolio</h2>
+          <a href="./assets/Ashish-Kumar-Resume.txt" download>Download file</a>
+        </div>
+      </section>
+    </main>
 
     <header class="top-pill" data-reveal>
       <a href="#home" aria-label="Ashish Kumar home" data-site-brand>Ashish</a>
@@ -60,18 +158,15 @@
       </header>
 
       <section class="classic-hero" aria-labelledby="classic-title">
-        <p data-classic-identity>AI &amp; Data Science Student</p>
-        <h1 id="classic-title" data-classic-title>Student Developer</h1>
-        <div class="classic-hero-copy">
-          <p data-classic-subtitle>Building useful AI, data, automation, and systems work.</p>
-          <p data-classic-location>Bangalore, India</p>
+        <div class="classic-landing-mark">
+          <p><span aria-hidden="true">&#128075;</span> Hi</p>
+          <h1 id="classic-title" data-classic-hero-name>Ashish Kumar</h1>
         </div>
-        <div class="classic-actions" data-classic-actions></div>
       </section>
 
       <section class="classic-section" id="classic-about" aria-labelledby="classic-about-title">
         <div class="classic-section-heading">
-          <p>About</p>
+          <p>👋 About</p>
           <h2 id="classic-about-title" data-classic-about-heading>Hey!</h2>
         </div>
         <div class="classic-text-stack">
@@ -83,7 +178,7 @@
 
       <section class="classic-section" id="classic-skills" aria-labelledby="classic-skills-title">
         <div class="classic-section-heading">
-          <p>Skills</p>
+          <p>🧰 Skills</p>
           <h2 id="classic-skills-title">My Stack</h2>
         </div>
         <div class="classic-skill-list" data-classic-skills></div>
@@ -91,7 +186,7 @@
 
       <section class="classic-section" id="classic-projects" aria-labelledby="classic-projects-title">
         <div class="classic-section-heading">
-          <p>Projects</p>
+          <p>📌 Projects</p>
           <h2 id="classic-projects-title" data-classic-projects-heading>Projects</h2>
         </div>
         <div class="classic-project-list" data-classic-projects></div>
@@ -99,7 +194,7 @@
 
       <section class="classic-section" id="classic-learning" aria-labelledby="classic-learning-title">
         <div class="classic-section-heading">
-          <p>Learning</p>
+          <p>📚 Learning</p>
           <h2 id="classic-learning-title" data-classic-learning-heading>Learning</h2>
         </div>
         <div class="classic-simple-list" data-classic-learning></div>
@@ -107,7 +202,7 @@
 
       <section class="classic-section" id="classic-notes" aria-labelledby="classic-notes-title">
         <div class="classic-section-heading">
-          <p>Notes</p>
+          <p>📝 Notes</p>
           <h2 id="classic-notes-title" data-classic-notes-heading>Notes</h2>
         </div>
         <div class="classic-simple-list" data-classic-notes></div>
@@ -115,7 +210,7 @@
 
       <section class="classic-section classic-contact" id="classic-contact" aria-labelledby="classic-contact-title">
         <div class="classic-section-heading">
-          <p>Contact</p>
+          <p>✉️ Contact</p>
           <h2 id="classic-contact-title" data-classic-contact-heading>Let's talk.</h2>
         </div>
         <div class="classic-contact-body">

@@ -1,4 +1,4 @@
-﻿const getPreferredTheme = () => {
+const getPreferredTheme = () => {
   const savedTheme = localStorage.getItem("theme");
   if (savedTheme === "dark" || savedTheme === "light") return savedTheme;
   return window.matchMedia("(prefers-color-scheme: dark)").matches ? "dark" : "light";
@@ -206,13 +206,26 @@ const makeFixedDraggable = (tool) => {
 };
 
 const setSiteView = (view) => {
-  const nextView = view === "modern" ? "modern" : "classic";
+  const nextView = view === "classic" || view === "modern" ? view : "landing";
   document.body.dataset.siteView = nextView;
-  $$(".site-switcher button").forEach((button) => {
+  if (nextView !== "landing") {
+    delete document.body.dataset.choiceFocus;
+    [
+      "--choice-split",
+      "--choice-panel-split",
+      "--choice-text-split",
+      "--choice-classic-opacity",
+      "--choice-modern-opacity",
+      "--choice-classic-scale",
+      "--choice-modern-scale"
+    ].forEach((property) => $(".choice-landing")?.style.removeProperty(property));
+  }
+  $$("[data-view-button]").forEach((button) => {
     const isActive = button.dataset.viewButton === nextView;
     button.classList.toggle("is-active", isActive);
     button.setAttribute("aria-pressed", String(isActive));
   });
+  $(".choice-landing")?.setAttribute("aria-hidden", String(nextView !== "landing"));
   $(".modern-site")?.setAttribute("aria-hidden", String(nextView !== "modern"));
   $(".classic-site")?.setAttribute("aria-hidden", String(nextView !== "classic"));
   $(".top-pill")?.classList.remove("is-menu-open");
@@ -231,12 +244,164 @@ const setSiteView = (view) => {
 };
 
 const setupSiteSwitcher = () => {
-  setSiteView("classic");
-  $$(".site-switcher button").forEach((button) => {
+  const choiceLabelPairs = [
+    ["Studio", "Lab"],
+    ["Craft", "Logic"],
+    ["Canvas", "Console"],
+    ["Form", "Function"],
+    ["Interface", "Engine"],
+    ["Vision", "System"],
+    ["Human", "Machine"],
+    ["Surface", "Structure"],
+    ["Experience", "Intelligence"]
+  ];
+  const choiceLanding = $(".choice-landing");
+  const choicePanel = $(".choice-panel");
+  const choiceIntro = $(".choice-intro");
+  const classicChoiceLabel = $('[data-choice-label="classic"]');
+  const modernChoiceLabel = $('[data-choice-label="modern"]');
+  let currentChoiceSplit = 50;
+  let pendingChoiceEvent = null;
+  let choiceFrame = 0;
+  let choiceLabelIndex = 0;
+  const fitChoiceLabel = (label) => {
+    if (!label) return;
+    label.style.removeProperty("--choice-label-fit");
+    const button = label.closest("button");
+    if (!button) return;
+    const availableWidth = Math.max(button.getBoundingClientRect().width - 18, 1);
+    const labelWidth = label.scrollWidth || label.getBoundingClientRect().width;
+    const fit = Math.min(1, availableWidth / Math.max(labelWidth, 1));
+    label.style.setProperty("--choice-label-fit", fit.toFixed(3));
+  };
+  const fitChoiceLabels = () => {
+    fitChoiceLabel(classicChoiceLabel);
+    fitChoiceLabel(modernChoiceLabel);
+  };
+  const setChoiceLabels = (index, animate = true) => {
+    if (!classicChoiceLabel || !modernChoiceLabel) return;
+    const [classicLabel, modernLabel] = choiceLabelPairs[index % choiceLabelPairs.length];
+    const applyLabels = () => {
+      classicChoiceLabel.textContent = classicLabel;
+      modernChoiceLabel.textContent = modernLabel;
+      classicChoiceLabel.classList.remove("is-changing");
+      modernChoiceLabel.classList.remove("is-changing");
+      requestAnimationFrame(fitChoiceLabels);
+    };
+    if (!animate) {
+      applyLabels();
+      return;
+    }
+    classicChoiceLabel.classList.add("is-changing");
+    modernChoiceLabel.classList.add("is-changing");
+    window.setTimeout(applyLabels, 220);
+  };
+  const setChoiceSplit = (split) => {
+    if (!choiceLanding) return;
+    const splitNumber = Number(split);
+    currentChoiceSplit = splitNumber;
+    choiceLanding.style.setProperty("--choice-split", `${splitNumber.toFixed(2)}%`);
+    const landingRect = choiceLanding.getBoundingClientRect();
+    const splitX = landingRect.left + landingRect.width * (splitNumber / 100);
+
+    if (!choiceIntro) {
+      choiceLanding.style.setProperty("--choice-text-split", `${splitNumber.toFixed(2)}%`);
+    } else {
+      const introRect = choiceIntro.getBoundingClientRect();
+      const textSplit = clamp((splitX - introRect.left) / Math.max(introRect.width, 1) * 100, 0, 100);
+      choiceLanding.style.setProperty("--choice-text-split", `${textSplit.toFixed(2)}%`);
+    }
+
+    if (choicePanel) {
+      const panelRect = choicePanel.getBoundingClientRect();
+      const panelSplit = clamp((splitX - panelRect.left) / Math.max(panelRect.width, 1) * 100, 0, 100);
+      choiceLanding.style.setProperty("--choice-panel-split", `${panelSplit.toFixed(2)}%`);
+    } else {
+      choiceLanding.style.setProperty("--choice-panel-split", `${splitNumber.toFixed(2)}%`);
+    }
+
+    const sideAmount = Math.abs(splitNumber - 50) / 32;
+    const classicStrength = splitNumber > 50 ? clamp(sideAmount, 0, 1) : 0;
+    const modernStrength = splitNumber < 50 ? clamp(sideAmount, 0, 1) : 0;
+    choiceLanding.style.setProperty("--choice-classic-opacity", (1 - modernStrength * 0.48).toFixed(3));
+    choiceLanding.style.setProperty("--choice-modern-opacity", (1 - classicStrength * 0.48).toFixed(3));
+    choiceLanding.style.setProperty("--choice-classic-scale", (1 + classicStrength * 0.04 - modernStrength * 0.18).toFixed(3));
+    choiceLanding.style.setProperty("--choice-modern-scale", (1 + modernStrength * 0.04 - classicStrength * 0.18).toFixed(3));
+    fitChoiceLabels();
+  };
+  const resetChoicePreview = () => {
+    delete document.body.dataset.choiceFocus;
+    setChoiceSplit(50);
+  };
+  const setChoicePreview = (view, split) => {
+    if (view !== "classic" && view !== "modern") {
+      resetChoicePreview();
+      return;
+    }
+    document.body.dataset.choiceFocus = view;
+    setChoiceSplit(split);
+  };
+  const updateChoicePreview = (event) => {
+    if (!choiceLanding || document.body.dataset.siteView !== "landing") return;
+    pendingChoiceEvent = event;
+    if (choiceFrame) return;
+    choiceFrame = requestAnimationFrame(() => {
+      choiceFrame = 0;
+      if (!pendingChoiceEvent) return;
+      const currentEvent = pendingChoiceEvent;
+      pendingChoiceEvent = null;
+      updateChoicePreviewFromPoint(currentEvent.clientX);
+    });
+  };
+  const updateChoicePreviewFromPoint = (clientX) => {
+    const rect = choiceLanding.getBoundingClientRect();
+    const progress = clamp((clientX - rect.left) / Math.max(rect.width, 1), 0, 1);
+    const distanceFromCenter = Math.abs(progress - 0.5) * 2;
+    const maxClassicSplit = rect.width < 560 ? 70 : 82;
+    const minClassicSplit = rect.width < 560 ? 30 : 18;
+    const pull = Math.pow(distanceFromCenter, 0.7);
+    const split = progress < 0.5 ? lerp(50, maxClassicSplit, pull) : lerp(50, minClassicSplit, pull);
+    setChoicePreview(progress < 0.5 ? "classic" : "modern", split.toFixed(2));
+  };
+
+  setChoiceLabels(choiceLabelIndex, false);
+  setSiteView("landing");
+  setChoiceSplit(currentChoiceSplit);
+  window.setInterval(() => {
+    if (document.body.dataset.siteView !== "landing") return;
+    choiceLabelIndex = (choiceLabelIndex + 1) % choiceLabelPairs.length;
+    setChoiceLabels(choiceLabelIndex);
+  }, 4000);
+  document.fonts?.ready.then(() => {
+    setChoiceSplit(currentChoiceSplit);
+  });
+  window.addEventListener("resize", () => {
+    setChoiceSplit(currentChoiceSplit);
+    fitChoiceLabels();
+  });
+  $$("[data-view-button]").forEach((button) => {
     button.addEventListener("click", () => {
       setSiteView(button.dataset.viewButton);
       window.scrollTo({ top: 0, behavior: "auto" });
     });
+  });
+  choiceLanding?.addEventListener("pointermove", updateChoicePreview);
+  choiceLanding?.addEventListener("pointerleave", () => {
+    resetChoicePreview();
+  });
+  $$(".choice-panel [data-view-button]").forEach((button) => {
+    button.addEventListener("pointerenter", updateChoicePreview);
+    button.addEventListener("focus", () => {
+      const keyboardSplit = window.innerWidth < 560
+        ? (button.dataset.viewButton === "classic" ? "70" : "30")
+        : (button.dataset.viewButton === "classic" ? "82" : "18");
+      setChoicePreview(button.dataset.viewButton, keyboardSplit);
+    });
+  });
+  choicePanel?.addEventListener("focusout", (event) => {
+    if (!choicePanel.contains(event.relatedTarget)) {
+      resetChoicePreview();
+    }
   });
 };
 
