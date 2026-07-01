@@ -38,10 +38,69 @@ const setupAnimationState = () => {
   updatePhaseThreeHeight();
   updatePhaseThree();
   updateStackRows();
+  syncSplitSkyDepth();
 };
 
 const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 const lerp = (start, end, amount) => start + (end - start) * amount;
+const syncSplitSkyDepth = () => {
+  const sky = $(".classic-sky-background");
+  const cloudLayer = $(".cloud-layer");
+  const birdCanvas = $("#bird-canvas");
+  if (!sky || !cloudLayer) return;
+
+  const documentHeight = Math.max(
+    document.body.scrollHeight,
+    document.documentElement.scrollHeight,
+    window.innerHeight
+  );
+  sky.style.height = `${documentHeight}px`;
+  cloudLayer.style.height = `${documentHeight}px`;
+
+  $$(".cloud[data-cloud-clone]", cloudLayer).forEach((clone) => clone.remove());
+  const originalClouds = $$(".cloud:not([data-cloud-clone])", cloudLayer);
+  const cycleHeight = window.innerHeight * 1.75;
+  const cycleCount = Math.ceil(documentHeight / cycleHeight);
+
+  if (birdCanvas) {
+    const birdCounts = [4, 2, 5, 3, 4, 2, 6, 3];
+    const birdClones = $$(".bird-canvas[data-bird-clone]", sky);
+    birdCanvas.dataset.birdCount = "4";
+    birdCanvas.dataset.birdBand = "top";
+    birdCanvas.style.top = "0px";
+    birdCanvas.style.height = `${Math.round(cycleHeight)}px`;
+
+    for (let cycle = 1; cycle < cycleCount; cycle += 1) {
+      const clone = birdClones[cycle - 1] || birdCanvas.cloneNode(false);
+      if (!clone.dataset.birdClone) {
+        clone.removeAttribute("id");
+        sky.appendChild(clone);
+      }
+      clone.dataset.birdClone = "true";
+      clone.dataset.birdBand = "lower";
+      clone.dataset.birdCount = String(birdCounts[cycle % birdCounts.length]);
+      clone.style.top = `${cycle * cycleHeight}px`;
+      clone.style.height = `${Math.round(cycleHeight)}px`;
+    }
+
+    birdClones.slice(Math.max(cycleCount - 1, 0)).forEach((clone) => clone.remove());
+  }
+
+  originalClouds.forEach((cloud) => {
+    const computed = getComputedStyle(cloud);
+    const baseTop = parseFloat(computed.top) || 0;
+    const baseDelay = parseFloat(computed.animationDelay) || 0;
+
+    for (let cycle = 1; cycle < cycleCount; cycle += 1) {
+      const clone = cloud.cloneNode(false);
+      clone.dataset.cloudClone = "true";
+      clone.style.top = `${baseTop + cycle * cycleHeight}px`;
+      clone.style.animationDelay = `${baseDelay - cycle * 9}s`;
+      cloudLayer.appendChild(clone);
+    }
+  });
+  document.dispatchEvent(new CustomEvent("split-sky-depth-synced"));
+};
 const getPhaseThreeTiming = () => ({
   introHold: Math.min(300, window.innerHeight * 0.28),
   outroHold: Math.min(240, window.innerHeight * 0.24),
@@ -51,6 +110,11 @@ const getPhaseThreeTiming = () => ({
 const updatePhaseTwo = () => {
   const phaseTwo = $(".phase-two");
   const flipCard = $(".flip-card");
+  if (document.body.dataset.siteView === "split") {
+    flipCard?.classList.remove("is-scroll-morph");
+    ["--morph-left", "--morph-top", "--morph-width", "--morph-height", "--morph-rotate", "--morph-tilt", "--morph-opacity"].forEach((prop) => flipCard?.style.removeProperty(prop));
+    return;
+  }
   if (!phaseTwo || window.matchMedia("(max-width: 920px)").matches) {
     flipCard?.classList.remove("is-scroll-morph");
     return;
@@ -206,41 +270,26 @@ const makeFixedDraggable = (tool) => {
 };
 
 const setSiteView = (view) => {
-  const nextView = view === "classic" || view === "modern" ? view : "landing";
+  const nextView = "split";
   document.body.dataset.siteView = nextView;
-  if (nextView !== "landing") {
-    delete document.body.dataset.choiceFocus;
-    [
-      "--choice-split",
-      "--choice-panel-split",
-      "--choice-text-split",
-      "--choice-classic-opacity",
-      "--choice-modern-opacity",
-      "--choice-classic-scale",
-      "--choice-modern-scale"
-    ].forEach((property) => $(".choice-landing")?.style.removeProperty(property));
-  }
   $$("[data-view-button]").forEach((button) => {
-    const isActive = button.dataset.viewButton === nextView;
-    button.classList.toggle("is-active", isActive);
-    button.setAttribute("aria-pressed", String(isActive));
+    button.classList.remove("is-active");
+    button.setAttribute("aria-pressed", "false");
   });
-  $(".choice-landing")?.setAttribute("aria-hidden", String(nextView !== "landing"));
-  $(".modern-site")?.setAttribute("aria-hidden", String(nextView !== "modern"));
-  $(".classic-site")?.setAttribute("aria-hidden", String(nextView !== "classic"));
+  $(".choice-landing")?.setAttribute("aria-hidden", "false");
+  $(".modern-site")?.setAttribute("aria-hidden", "false");
+  $(".classic-site")?.setAttribute("aria-hidden", "false");
   $(".top-pill")?.classList.remove("is-menu-open");
   document.body.classList.remove("menu-open");
   $(".menu-button")?.setAttribute("aria-expanded", "false");
 
-  if (nextView === "modern") {
-    requestAnimationFrame(() => {
-      updatePhaseTwo();
-      updateScrollProgress();
-      updatePhaseThreeHeight();
-      updatePhaseThree();
-      updateStackRows();
-    });
-  }
+  requestAnimationFrame(() => {
+    updatePhaseTwo();
+    updateScrollProgress();
+    updatePhaseThreeHeight();
+    updatePhaseThree();
+    updateStackRows();
+  });
 };
 
 const setupSiteSwitcher = () => {
@@ -298,8 +347,10 @@ const setupSiteSwitcher = () => {
   };
   const setChoiceSplit = (split) => {
     if (!choiceLanding) return;
-    const splitNumber = Number(split);
+    const splitNumber = clamp(Number(split), 18, 82);
     currentChoiceSplit = splitNumber;
+    document.documentElement.style.setProperty("--site-split", `${splitNumber.toFixed(2)}%`);
+    document.dispatchEvent(new CustomEvent("site-split-change"));
     choiceLanding.style.setProperty("--choice-split", `${splitNumber.toFixed(2)}%`);
     const landingRect = choiceLanding.getBoundingClientRect();
     const splitX = landingRect.left + landingRect.width * (splitNumber / 100);
@@ -341,8 +392,12 @@ const setupSiteSwitcher = () => {
     document.body.dataset.choiceFocus = view;
     setChoiceSplit(split);
   };
+  const scrollToPortfolioSide = (view) => {
+    const target = view === "classic" ? $("#classic-home") : $("#home");
+    target?.scrollIntoView({ behavior: "smooth", block: "start" });
+  };
   const updateChoicePreview = (event) => {
-    if (!choiceLanding || document.body.dataset.siteView !== "landing") return;
+    if (!choiceLanding || choiceLanding.classList.contains("is-navigating")) return;
     pendingChoiceEvent = event;
     if (choiceFrame) return;
     choiceFrame = requestAnimationFrame(() => {
@@ -354,21 +409,24 @@ const setupSiteSwitcher = () => {
     });
   };
   const updateChoicePreviewFromPoint = (clientX) => {
-    const rect = choiceLanding.getBoundingClientRect();
-    const progress = clamp((clientX - rect.left) / Math.max(rect.width, 1), 0, 1);
+    const width = document.documentElement.clientWidth || window.innerWidth;
+    const progress = clamp(clientX / Math.max(width, 1), 0, 1);
     const distanceFromCenter = Math.abs(progress - 0.5) * 2;
-    const maxClassicSplit = rect.width < 560 ? 70 : 82;
-    const minClassicSplit = rect.width < 560 ? 30 : 18;
+    const maxClassicSplit = width < 560 ? 70 : 82;
+    const minClassicSplit = width < 560 ? 30 : 18;
     const pull = Math.pow(distanceFromCenter, 0.7);
     const split = progress < 0.5 ? lerp(50, maxClassicSplit, pull) : lerp(50, minClassicSplit, pull);
     setChoicePreview(progress < 0.5 ? "classic" : "modern", split.toFixed(2));
   };
 
+  const transitionToView = (view) => {
+    scrollToPortfolioSide(view);
+  };
+
   setChoiceLabels(choiceLabelIndex, false);
-  setSiteView("landing");
+  setSiteView("split");
   setChoiceSplit(currentChoiceSplit);
   window.setInterval(() => {
-    if (document.body.dataset.siteView !== "landing") return;
     choiceLabelIndex = (choiceLabelIndex + 1) % choiceLabelPairs.length;
     setChoiceLabels(choiceLabelIndex);
   }, 4000);
@@ -378,20 +436,40 @@ const setupSiteSwitcher = () => {
   window.addEventListener("resize", () => {
     setChoiceSplit(currentChoiceSplit);
     fitChoiceLabels();
+    syncSplitSkyDepth();
   });
   $$("[data-view-button]").forEach((button) => {
-    button.addEventListener("click", () => {
-      setSiteView(button.dataset.viewButton);
-      window.scrollTo({ top: 0, behavior: "auto" });
+    button.addEventListener("click", (event) => {
+      const view = button.dataset.viewButton;
+      if (view === "classic" || view === "modern") {
+        event.preventDefault();
+        transitionToView(view);
+      }
     });
   });
-  choiceLanding?.addEventListener("pointermove", updateChoicePreview);
-  choiceLanding?.addEventListener("pointerleave", () => {
-    resetChoicePreview();
+  choiceLanding?.addEventListener("click", (event) => {
+    if (choiceLanding.classList.contains("is-navigating")) return;
+
+    // Ignore clicks if they were on buttons or anchors
+    if (event.target.closest("button") || event.target.closest("a")) {
+      return;
+    }
+
+    const rect = choiceLanding.getBoundingClientRect();
+    const clickX = event.clientX;
+    const splitX = rect.left + rect.width * (currentChoiceSplit / 100);
+
+    if (clickX < splitX) {
+      transitionToView("classic");
+    } else {
+      transitionToView("modern");
+    }
   });
+  document.addEventListener("pointermove", updateChoicePreview);
   $$(".choice-panel [data-view-button]").forEach((button) => {
     button.addEventListener("pointerenter", updateChoicePreview);
     button.addEventListener("focus", () => {
+      if (choiceLanding.classList.contains("is-navigating")) return;
       const keyboardSplit = window.innerWidth < 560
         ? (button.dataset.viewButton === "classic" ? "70" : "30")
         : (button.dataset.viewButton === "classic" ? "82" : "18");
@@ -399,6 +477,7 @@ const setupSiteSwitcher = () => {
     });
   });
   choicePanel?.addEventListener("focusout", (event) => {
+    if (choiceLanding.classList.contains("is-navigating")) return;
     if (!choicePanel.contains(event.relatedTarget)) {
       resetChoicePreview();
     }
@@ -435,6 +514,8 @@ const setupInteractions = () => {
     window.setTimeout(() => { submitButton.textContent = label; }, 1800);
   });
   $$(".floating-tool").forEach(makeDraggable);
+  window.setTimeout(syncSplitSkyDepth, 300);
+  window.setTimeout(syncSplitSkyDepth, 1200);
   document.addEventListener("click", () => {});
 };
 
@@ -451,5 +532,6 @@ window.addEventListener("resize", () => {
   updatePhaseThreeHeight();
   updatePhaseThree();
   updateStackRows();
+  syncSplitSkyDepth();
 });
 

@@ -15,8 +15,16 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="./styles.css" />
+    <script type="importmap">
+      {
+        "imports": {
+          "three": "https://unpkg.com/three@0.156.1/build/three.module.js",
+          "three/addons/": "https://unpkg.com/three@0.156.1/examples/jsm/"
+        }
+      }
+    </script>
   </head>
-  <body data-site-view="landing">
+  <body data-site-view="split">
     <div class="paper-grain" aria-hidden="true"></div>
     <div class="scroll-progress" aria-hidden="true">
       <span class="scroll-progress-fill"></span>
@@ -31,55 +39,56 @@
       <button type="button" data-view-button="modern" aria-pressed="false">Modern</button>
     </div>
 
-    <main class="choice-landing" id="landing">
-      <div class="classic-sky-background" aria-hidden="true">
-        <!-- SVG filter to convert black background to transparent for generated PNG assets -->
-        <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
-          <filter id="remove-black">
-            <feColorMatrix type="matrix" values="
-              1 0 0 0 0
-              0 1 0 0 0
-              0 0 1 0 0
-              0.33 0.33 0.33 0 0
-            " />
-          </filter>
-        </svg>
+    <div class="classic-sky-background" aria-hidden="true">
+      <!-- SVG filter to convert black background to transparent for generated PNG assets -->
+      <svg style="position: absolute; width: 0; height: 0; pointer-events: none;">
+        <filter id="remove-black">
+          <feColorMatrix type="matrix" values="
+            1 0 0 0 0
+            0 1 0 0 0
+            0 0 1 0 0
+            0.33 0.33 0.33 0 0
+          " />
+        </filter>
+      </svg>
 
-        <div class="sky-layer sky-day"></div>
-        <div class="sky-layer sky-night"></div>
-        <div class="sky-layer milky-way"></div>
-        
-        <div class="sun"></div>
-        
-        <div class="cloud-layer">
-          <div class="cloud cloud-1"></div>
-          <div class="cloud cloud-2"></div>
-          <div class="cloud cloud-3"></div>
-          <div class="cloud cloud-4"></div>
-          <div class="cloud cloud-5"></div>
-          <div class="cloud cloud-6"></div>
-          <div class="cloud cloud-7"></div>
-          <div class="cloud cloud-8"></div>
-          <div class="cloud cloud-9"></div>
-          <div class="cloud cloud-10"></div>
-          <div class="cloud cloud-11"></div>
-          <div class="cloud cloud-12"></div>
-          <div class="cloud cloud-13"></div>
-          <div class="cloud cloud-14"></div>
-          <div class="cloud cloud-15"></div>
-          <div class="cloud cloud-16"></div>
-          <div class="cloud cloud-17"></div>
-          <div class="cloud cloud-18"></div>
-          <div class="cloud cloud-19"></div>
-          <div class="cloud cloud-20"></div>
-          <div class="cloud cloud-21"></div>
-          <div class="cloud cloud-22"></div>
-          <div class="cloud cloud-23"></div>
-          <div class="cloud cloud-24"></div>
-          <div class="cloud cloud-25"></div>
-        </div>
+      <div class="sky-layer sky-day"></div>
+      <div class="sky-layer sky-night"></div>
+      <div class="sky-layer milky-way"></div>
+      
+      <div class="sun"></div>
+      
+      <div class="cloud-layer">
+        <div class="cloud cloud-1"></div>
+        <div class="cloud cloud-2"></div>
+        <div class="cloud cloud-3"></div>
+        <div class="cloud cloud-4"></div>
+        <div class="cloud cloud-5"></div>
+        <div class="cloud cloud-6"></div>
+        <div class="cloud cloud-7"></div>
+        <div class="cloud cloud-8"></div>
+        <div class="cloud cloud-9"></div>
+        <div class="cloud cloud-10"></div>
+        <div class="cloud cloud-11"></div>
+        <div class="cloud cloud-12"></div>
+        <div class="cloud cloud-13"></div>
+        <div class="cloud cloud-14"></div>
+        <div class="cloud cloud-15"></div>
+        <div class="cloud cloud-16"></div>
+        <div class="cloud cloud-17"></div>
+        <div class="cloud cloud-18"></div>
+        <div class="cloud cloud-19"></div>
+        <div class="cloud cloud-20"></div>
+        <div class="cloud cloud-21"></div>
+        <div class="cloud cloud-22"></div>
+        <div class="cloud cloud-23"></div>
+        <div class="cloud cloud-24"></div>
+        <div class="cloud cloud-25"></div>
       </div>
+      <canvas id="bird-canvas" class="bird-canvas" data-bird-band="top" data-bird-count="4"></canvas>
+    </div>
 
+    <main class="choice-landing" id="landing">
       <section class="choice-intro" aria-labelledby="landing-title">
         <div class="choice-intro-layer choice-intro-classic" aria-hidden="true">
           <p>Hey!</p>
@@ -125,23 +134,8 @@
       </section>
     </main>
 
-    <header class="top-pill" data-reveal>
-      <a href="#home" aria-label="Ashish Kumar home" data-site-brand>Ashish</a>
-      <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-      <nav class="menu-panel" aria-label="Main menu">
-        <a href="#about">About Me</a>
-        <a href="#skills">Skills</a>
-        <a href="#projects">Projects</a>
-        <a href="#learning">Learning</a>
-        <a href="#notes">Notes</a>
-        <a href="#contact">Contact</a>
-      </nav>
-    </header>
-
+    <section class="split-portfolio" id="portfolio-split" aria-label="Classic and modern portfolio">
+      <div class="split-pane split-pane-classic">
     <main class="classic-site" id="classic-home">
       <header class="classic-header">
         <a href="#classic-home" class="classic-brand" data-classic-name>Ashish Kumar</a>
@@ -215,6 +209,25 @@
         </div>
       </section>
     </main>
+      </div>
+
+      <div class="split-pane split-pane-modern">
+    <header class="top-pill" data-reveal>
+      <a href="#home" aria-label="Ashish Kumar home" data-site-brand>Ashish</a>
+      <button class="menu-button" type="button" aria-label="Open navigation menu" aria-expanded="false">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+      <nav class="menu-panel" aria-label="Main menu">
+        <a href="#about">About Me</a>
+        <a href="#skills">Skills</a>
+        <a href="#projects">Projects</a>
+        <a href="#learning">Learning</a>
+        <a href="#notes">Notes</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </header>
 
     <main class="modern-site" id="home">
       <section class="reference-hero" aria-labelledby="hero-title">
@@ -387,6 +400,8 @@
         </div>
       </footer>
     </main>
+      </div>
+    </section>
 
     <script type="application/json" id="site-content-snapshot">
 {
@@ -678,5 +693,6 @@
     <script src="./js/content-renderer.js"></script>
     <script src="./js/animations.js"></script>
     <script src="./js/main.js"></script>
+    <script type="module" src="./js/bird-renderer.js"></script>
   </body>
 </html>
