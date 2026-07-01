@@ -98,7 +98,7 @@ document.addEventListener("DOMContentLoaded", () => {
         const progress = i / flockSize;
         birdClone.position.set(
           -boundsX + progress * 2 * boundsX,
-          -boundsY + 0.35 * boundsY + Math.random() * 0.5 * boundsY,
+          10 + Math.random() * 22,
           -35 + Math.random() * 70
         );
 
@@ -188,10 +188,10 @@ document.addEventListener("DOMContentLoaded", () => {
       const padding = 15;
       if (bird.velocity.x > 0 && bird.mesh.position.x > boundsX + padding) {
         bird.mesh.position.x = -boundsX - padding;
-        bird.mesh.position.y = -boundsY + 0.3 * boundsY + Math.random() * 0.5 * boundsY;
+        bird.mesh.position.y = 10 + Math.random() * 22;
       } else if (bird.velocity.x < 0 && bird.mesh.position.x < -boundsX - padding) {
         bird.mesh.position.x = boundsX + padding;
-        bird.mesh.position.y = -boundsY + 0.3 * boundsY + Math.random() * 0.5 * boundsY;
+        bird.mesh.position.y = 10 + Math.random() * 22;
       }
     });
 
@@ -200,6 +200,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   animate();
 });
+
 
 
 
