@@ -635,15 +635,6 @@ html[data-theme="dark"] .cloud {
   animation-delay: -31s;
 }
 
-#birds-canvas {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  z-index: 8; /* Behind foreground clouds (15) but in front of background ones (5) */
-  pointer-events: none;
-}
-
 @keyframes drift {
   from { transform: translateX(0); }
   to { transform: translateX(160vw); }
