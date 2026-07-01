@@ -255,14 +255,16 @@ html[data-theme="dark"] .celestial-track {
   transform: translate(-50%, -50%);
   width: 520px;
   height: 520px;
+  border-radius: 50%;
   background: radial-gradient(
     circle, 
     #ffffff 0%, 
     rgba(255, 253, 245, 0.95) 8%, 
-    rgba(255, 225, 90, 0.42) 28%, 
-    rgba(255, 180, 30, 0.12) 58%, 
-    rgba(255, 180, 30, 0.03) 78%, 
-    transparent 95%
+    rgba(255, 225, 90, 0.42) 25%, 
+    rgba(255, 180, 30, 0.12) 50%, 
+    rgba(255, 180, 30, 0.02) 70%, 
+    rgba(255, 180, 30, 0) 85%,
+    transparent 100%
   );
   z-index: 2;
   pointer-events: none;
@@ -310,8 +312,8 @@ html[data-theme="dark"] .cloud {
   height: 42vh;
   opacity: 1;
   z-index: 15;
-  animation: drift 75s linear infinite;
-  animation-delay: -40s; /* Distributed across viewport */
+  animation: drift 90s linear infinite;
+  animation-delay: -88s; /* Contiguous spacing */
 }
 
 .cloud-2 {
@@ -323,7 +325,7 @@ html[data-theme="dark"] .cloud {
   height: 80vh;
   opacity: 1;
   z-index: 15;
-  animation: drift 95s linear infinite;
+  animation: drift 90s linear infinite;
   animation-delay: -62s; /* Matches screenshot center-left layout */
 }
 
@@ -338,7 +340,7 @@ html[data-theme="dark"] .cloud {
   z-index: 5;
   filter: url(#remove-black) blur(1.5px);
   animation: drift 180s linear infinite;
-  animation-delay: -84s; /* Distributed across viewport */
+  animation-delay: -84s;
 }
 
 .cloud-4 {
@@ -350,8 +352,8 @@ html[data-theme="dark"] .cloud {
   height: 28vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 130s linear infinite;
-  animation-delay: -43s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -33s; /* Contiguous spacing */
 }
 
 .cloud-5 {
@@ -363,7 +365,7 @@ html[data-theme="dark"] .cloud {
   height: 46vh;
   opacity: 0.98;
   z-index: 15;
-  animation: drift 85s linear infinite;
+  animation: drift 90s linear infinite;
   animation-delay: -36s; /* Matches screenshot center layout */
 }
 
@@ -376,8 +378,8 @@ html[data-theme="dark"] .cloud {
   height: 32vh;
   opacity: 0.85;
   z-index: 10;
-  animation: drift 125s linear infinite;
-  animation-delay: -70s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -113.5s; /* Contiguous spacing */
 }
 
 .cloud-7 {
@@ -389,8 +391,8 @@ html[data-theme="dark"] .cloud {
   height: 28vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 110s linear infinite;
-  animation-delay: -75s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -79s; /* Contiguous spacing */
 }
 
 .cloud-8 {
@@ -410,27 +412,27 @@ html[data-theme="dark"] .cloud {
 .cloud-9 {
   /* FOREGROUND (Near, fast, crisp) */
   background-image: url("./assets/cloud_8.png"); /* Fallback for missing cloud_9.png */
-  top: 32vh;
+  top: 98vh; /* Lowered to middle-lower viewport */
   left: -100vw;
   width: 100vw;
   height: 50vh;
   opacity: 0.98;
   z-index: 15;
   animation: drift 90s linear infinite;
-  animation-delay: -40s; /* Distributed across viewport */
+  animation-delay: -75s; /* Contiguous spacing */
 }
 
 .cloud-10 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_11.png");
-  top: 58vh;
+  top: 112vh; /* Lowered to lower viewport */
   left: -115vw;
   width: 115vw;
   height: 26vh;
   opacity: 0.9;
   z-index: 10;
   animation: drift 115s linear infinite;
-  animation-delay: -54s; /* Distributed across viewport */
+  animation-delay: -90.5s; /* Contiguous spacing */
 }
 
 .cloud-11 {
@@ -442,8 +444,8 @@ html[data-theme="dark"] .cloud {
   height: 26vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 100s linear infinite;
-  animation-delay: -24s; /* Matches top-left small cloud in screenshot */
+  animation: drift 115s linear infinite;
+  animation-delay: -27s; /* Matches top-left small cloud starting position */
 }
 
 .cloud-12 {
@@ -455,14 +457,14 @@ html[data-theme="dark"] .cloud {
   height: 48vh;
   opacity: 0.98;
   z-index: 15;
-  animation: drift 80s linear infinite;
-  animation-delay: -18s; /* Distributed across viewport */
+  animation: drift 90s linear infinite;
+  animation-delay: -10s; /* Contiguous spacing */
 }
 
 .cloud-13 {
   /* BACKGROUND (Far, slow, hazy/blurred) */
   background-image: url("./assets/cloud_3.png");
-  top: 46vh;
+  top: 130vh; /* Lowered to lower viewport */
   left: -26vw;
   width: 22vw;
   height: 12vh;
@@ -470,33 +472,33 @@ html[data-theme="dark"] .cloud {
   z-index: 5;
   filter: url(#remove-black) blur(1px);
   animation: drift 170s linear infinite;
-  animation-delay: -102s; /* Distributed across viewport */
+  animation-delay: -102s;
 }
 
 .cloud-14 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_8.png");
-  top: 22vh;
+  top: 120vh; /* Lowered to lower viewport */
   left: -80vw;
   width: 80vw;
   height: 25vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 120s linear infinite;
-  animation-delay: -45s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -44.5s; /* Contiguous spacing */
 }
 
 .cloud-15 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_1.png");
-  top: 11vh;
+  top: 142vh; /* Lowered to lower viewport */
   left: -62vw;
   width: 62vw;
   height: 35vh;
   opacity: 0.9;
   z-index: 10;
   animation: drift 115s linear infinite;
-  animation-delay: -52s; /* Distributed across viewport */
+  animation-delay: -10s; /* Contiguous spacing */
 }
 
 .cloud-16 {
@@ -510,7 +512,7 @@ html[data-theme="dark"] .cloud {
   z-index: 5;
   filter: url(#remove-black) blur(1.5px);
   animation: drift 200s linear infinite;
-  animation-delay: -90s; /* Distributed across viewport */
+  animation-delay: -90s;
 }
 
 .cloud-17 {
@@ -522,40 +524,40 @@ html[data-theme="dark"] .cloud {
   height: 38vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 105s linear infinite;
+  animation: drift 115s linear infinite;
   animation-delay: -71s; /* Matches center-right medium cloud in screenshot */
 }
 
 .cloud-18 {
   /* FOREGROUND (Near, fast, crisp) */
   background-image: url("./assets/cloud_10.png");
-  top: 16vh;
+  top: 154vh; /* Lowered to lower viewport */
   left: -120vw;
   width: 120vw;
   height: 28vh;
   opacity: 0.98;
   z-index: 15;
-  animation: drift 88s linear infinite;
-  animation-delay: -38s; /* Distributed across viewport */
+  animation: drift 90s linear infinite;
+  animation-delay: -23s; /* Contiguous spacing */
 }
 
 .cloud-19 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_1.png");
-  top: 74vh;
+  top: 162vh; /* Lowered to lower viewport */
   left: -56vw;
   width: 56vw;
   height: 32vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 120s linear infinite;
-  animation-delay: -64s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -21.5s; /* Contiguous spacing */
 }
 
 .cloud-20 {
   /* BACKGROUND (Far, slow, hazy/blurred) */
   background-image: url("./assets/cloud_3.png");
-  top: 78vh;
+  top: 148vh; /* Lowered to lower viewport */
   left: -20vw;
   width: 18vw;
   height: 10vh;
@@ -563,20 +565,20 @@ html[data-theme="dark"] .cloud {
   z-index: 5;
   filter: url(#remove-black) blur(2px);
   animation: drift 220s linear infinite;
-  animation-delay: -137s; /* Distributed across viewport */
+  animation-delay: -137s;
 }
 
 .cloud-21 {
   /* FOREGROUND (Near, fast, crisp) */
   background-image: url("./assets/cloud_7.png");
-  top: 25vh;
+  top: 65vh; /* Lowered to middle viewport */
   left: -125vw;
   width: 125vw;
   height: 75vh;
   opacity: 0.98;
   z-index: 15;
   animation: drift 90s linear infinite;
-  animation-delay: -50s; /* Distributed across viewport */
+  animation-delay: -49s; /* Contiguous spacing */
 }
 
 .cloud-22 {
@@ -596,33 +598,33 @@ html[data-theme="dark"] .cloud {
 .cloud-23 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_5.png");
-  top: 34vh;
+  top: 128vh; /* Lowered to lower viewport */
   left: -60vw;
   width: 60vw;
   height: 34vh;
   opacity: 0.9;
   z-index: 10;
   animation: drift 115s linear infinite;
-  animation-delay: -57s; /* Distributed across viewport */
+  animation-delay: -102s; /* Contiguous spacing */
 }
 
 .cloud-24 {
   /* MIDGROUND (Medium) */
   background-image: url("./assets/cloud_11.png");
-  top: 35vh;
+  top: 85vh; /* Lowered to middle-lower viewport */
   left: -115vw;
   width: 115vw;
   height: 26vh;
   opacity: 0.9;
   z-index: 10;
-  animation: drift 125s linear infinite;
-  animation-delay: -55s; /* Distributed across viewport */
+  animation: drift 115s linear infinite;
+  animation-delay: -56s; /* Contiguous spacing */
 }
 
 .cloud-25 {
   /* BACKGROUND (Far, slow, hazy/blurred) */
   background-image: url("./assets/cloud_3.png");
-  top: 7vh;
+  top: 104vh; /* Lowered to lower viewport */
   left: -24vw;
   width: 22vw;
   height: 13vh;
@@ -630,7 +632,7 @@ html[data-theme="dark"] .cloud {
   z-index: 5;
   filter: url(#remove-black) blur(1.5px);
   animation: drift 175s linear infinite;
-  animation-delay: -31s; /* Distributed across viewport */
+  animation-delay: -31s;
 }
 
 @keyframes drift {
